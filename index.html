@@ -1,0 +1,1327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Akash Chauhan - Frontend Developer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #0a0a0a;
+            color: #fff;
+            overflow-x: hidden;
+            cursor: none;
+            scroll-behavior: smooth;
+        }
+
+        /* Custom Cursor */
+        .cursor {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #00ffff;
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            transition: all 0.1s ease;
+            mix-blend-mode: difference;
+        }
+
+        .cursor-follower {
+            width: 8px;
+            height: 8px;
+            background: #00ffff;
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            transition: all 0.15s ease;
+        }
+
+        /* Animated Background */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            opacity: 0.3;
+        }
+
+        .particle {
+            position: absolute;
+            background: linear-gradient(45deg, #00ffff, #ff00ff);
+            border-radius: 50%;
+            animation: float 20s infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) translateX(0) scale(1); opacity: 0.7; }
+            25% { transform: translateY(-100px) translateX(100px) scale(1.2); opacity: 1; }
+            50% { transform: translateY(-50px) translateX(-100px) scale(0.8); opacity: 0.5; }
+            75% { transform: translateY(100px) translateX(50px) scale(1.1); opacity: 0.8; }
+        }
+
+        /* Container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+        }
+
+        .glitch-wrapper {
+            position: relative;
+            margin-bottom: 30px;
+        }
+
+        .glitch {
+            font-size: 80px;
+            font-weight: 900;
+            text-transform: uppercase;
+            position: relative;
+            text-shadow: 0.05em 0 0 #00ffff, -0.03em -0.04em 0 #ff00ff,
+                         0.025em 0.04em 0 #ffff00;
+            animation: glitch 1s infinite;
+            transition: all 0.3s ease;
+        }
+
+        @keyframes glitch {
+            0% {
+                text-shadow: 0.05em 0 0 #00ffff, -0.03em -0.04em 0 #ff00ff,
+                             0.025em 0.04em 0 #ffff00;
+            }
+            14% {
+                text-shadow: 0.05em 0 0 #00ffff, -0.03em -0.04em 0 #ff00ff,
+                             0.025em 0.04em 0 #ffff00;
+            }
+            15% {
+                text-shadow: -0.05em -0.025em 0 #00ffff, 0.025em 0.035em 0 #ff00ff,
+                             -0.05em -0.05em 0 #ffff00;
+            }
+            49% {
+                text-shadow: -0.05em -0.025em 0 #00ffff, 0.025em 0.035em 0 #ff00ff,
+                             -0.05em -0.05em 0 #ffff00;
+            }
+            50% {
+                text-shadow: 0.025em 0.05em 0 #00ffff, 0.05em 0 0 #ff00ff,
+                             0 -0.05em 0 #ffff00;
+            }
+            99% {
+                text-shadow: 0.025em 0.05em 0 #00ffff, 0.05em 0 0 #ff00ff,
+                             0 -0.05em 0 #ffff00;
+            }
+            100% {
+                text-shadow: -0.025em 0 0 #00ffff, -0.025em -0.025em 0 #ff00ff,
+                             -0.025em -0.05em 0 #ffff00;
+            }
+        }
+
+        .subtitle {
+            font-size: 32px;
+            background: linear-gradient(45deg, #00ffff, #ff00ff, #ffff00, #00ffff);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradient-shift 3s ease infinite;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+
+        @keyframes gradient-shift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .role-badge {
+            display: inline-block;
+            padding: 15px 30px;
+            background: rgba(0, 255, 255, 0.1);
+            border: 2px solid #00ffff;
+            border-radius: 50px;
+            font-size: 18px;
+            margin-top: 20px;
+            animation: pulse-border 2s infinite;
+        }
+
+        /* GitHub Link Styling */
+        .github-link {
+            display: inline-block;
+            padding: 12px 25px;
+            background: rgba(255, 0, 255, 0.1);
+            border: 2px solid #ff00ff;
+            border-radius: 50px;
+            font-size: 16px;
+            margin: 20px 10px 0;
+            text-decoration: none;
+            color: #ff00ff;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .github-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 0, 255, 0.3), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .github-link:hover::before {
+            left: 100%;
+        }
+
+        .github-link:hover {
+            border-color: #00ffff;
+            color: #00ffff;
+            box-shadow: 0 0 30px rgba(255, 0, 255, 0.5);
+            transform: translateY(-2px);
+        }
+
+        .github-icon {
+            margin-right: 8px;
+            font-size: 18px;
+        }
+
+        @keyframes pulse-border {
+            0%, 100% { border-color: #00ffff; box-shadow: 0 0 20px rgba(0, 255, 255, 0.3); }
+            50% { border-color: #ff00ff; box-shadow: 0 0 40px rgba(255, 0, 255, 0.5); }
+        }
+
+        /* Code Block */
+        .code-section {
+            background: rgba(20, 20, 20, 0.8);
+            border: 1px solid #333;
+            border-radius: 20px;
+            padding: 40px;
+            margin: 60px 0;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+            animation: slide-in 1s ease;
+        }
+
+        @keyframes slide-in {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .code-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(0, 255, 255, 0.1), transparent);
+            animation: scan 3s linear infinite;
+        }
+
+        @keyframes scan {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+
+        pre {
+            position: relative;
+            z-index: 1;
+            font-family: 'Courier New', monospace;
+            font-size: 16px;
+            line-height: 1.8;
+            color: #00ff00;
+            overflow-x: auto;
+        }
+
+        .key { color: #ff00ff; }
+        .string { color: #ffff00; }
+        .value { color: #00ffff; }
+        .bracket { color: #fff; }
+
+        /* Section Titles */
+        .section-title {
+            font-size: 48px;
+            font-weight: 800;
+            margin: 80px 0 40px;
+            position: relative;
+            display: inline-block;
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .section-title.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-title::before {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, #00ffff, #ff00ff);
+            animation: expand 2s ease infinite;
+        }
+
+        @keyframes expand {
+            0%, 100% { transform: scaleX(0.5); opacity: 0.5; }
+            50% { transform: scaleX(1); opacity: 1; }
+        }
+
+        /* Cards */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        @media (max-width: 768px) {
+            .grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+        }
+
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .card {
+            background: rgba(30, 30, 30, 0.6);
+            border: 2px solid transparent;
+            border-radius: 20px;
+            padding: 30px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.6s cubic-bezier(0.23, 1, 0.320, 1);
+            backdrop-filter: blur(10px);
+            opacity: 0;
+            transform: translateY(50px) scale(0.95);
+        }
+
+        .card.animate {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 255, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .card:hover::before {
+            left: 100%;
+        }
+
+        .card:hover {
+            border-color: #00ffff;
+            transform: translateY(-15px) rotateX(5deg) scale(1.02);
+            box-shadow: 0 25px 80px rgba(0, 255, 255, 0.4);
+        }
+
+        .card-title {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: #00ffff;
+        }
+
+        .card-description {
+            font-size: 16px;
+            line-height: 1.6;
+            color: #ccc;
+        }
+
+        /* Tech Stack */
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 40px 0;
+        }
+
+        @media (max-width: 768px) {
+            .tech-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+        }
+
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .tech-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .tech-category {
+            background: linear-gradient(135deg, rgba(0, 255, 255, 0.1), rgba(255, 0, 255, 0.1));
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 25px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.5s cubic-bezier(0.23, 1, 0.320, 1);
+            opacity: 0;
+            transform: translateY(50px) scale(0.95);
+        }
+
+        .tech-category.animate {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        .tech-category::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(0, 255, 255, 0.2);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s ease, height 0.6s ease;
+        }
+
+        .tech-category:hover::after {
+            width: 300px;
+            height: 300px;
+        }
+
+        .tech-title {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: #ff00ff;
+            position: relative;
+            z-index: 1;
+        }
+
+        .tech-list {
+            list-style: none;
+            position: relative;
+            z-index: 1;
+        }
+
+        .tech-list li {
+            padding: 8px 0;
+            position: relative;
+            padding-left: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .tech-list li::before {
+            content: '▹';
+            position: absolute;
+            left: 0;
+            color: #00ffff;
+            transition: transform 0.3s ease;
+        }
+
+        .tech-list li:hover {
+            padding-left: 30px;
+            color: #00ffff;
+        }
+
+        .tech-list li:hover::before {
+            transform: translateX(5px);
+        }
+
+        /* Expertise List */
+        .expertise-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin: 40px 0;
+        }
+
+        @media (max-width: 768px) {
+            .expertise-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+        }
+
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .expertise-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .expertise-item {
+            background: rgba(0, 255, 255, 0.05);
+            border-left: 4px solid #00ffff;
+            padding: 20px;
+            border-radius: 10px;
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.320, 1);
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateX(-50px);
+        }
+
+        .expertise-item.animate {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .expertise-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 255, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .expertise-item:hover::before {
+            left: 100%;
+        }
+
+        .expertise-item:hover {
+            background: rgba(0, 255, 255, 0.1);
+            border-left-width: 8px;
+            transform: translateX(10px);
+        }
+
+        /* Approach Section */
+        .approach-list {
+            list-style: none;
+            margin: 40px 0;
+        }
+
+        .approach-item {
+            background: linear-gradient(90deg, rgba(255, 0, 255, 0.1), transparent);
+            border: 1px solid rgba(255, 0, 255, 0.3);
+            padding: 25px;
+            margin: 20px 0;
+            border-radius: 15px;
+            font-size: 18px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.5s cubic-bezier(0.23, 1, 0.320, 1);
+            opacity: 0;
+            transform: translateX(-30px);
+        }
+
+        .approach-item.animate {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .approach-item::before {
+            content: '✓';
+            position: absolute;
+            left: -50px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 40px;
+            color: #00ffff;
+            transition: left 0.4s ease;
+        }
+
+        .approach-item:hover::before {
+            left: 20px;
+        }
+
+        .approach-item:hover {
+            padding-left: 80px;
+            background: linear-gradient(90deg, rgba(0, 255, 255, 0.2), transparent);
+            border-color: #00ffff;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 60px 20px;
+            background: linear-gradient(180deg, transparent, rgba(0, 255, 255, 0.1));
+            margin-top: 80px;
+            position: relative;
+        }
+
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #00ffff, #ff00ff, #00ffff, transparent);
+            animation: slide-horizontal 3s linear infinite;
+        }
+
+        @keyframes slide-horizontal {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        .quote {
+            font-size: 24px;
+            font-style: italic;
+            margin: 30px 0;
+            background: linear-gradient(45deg, #00ffff, #ff00ff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradient-shift 3s ease infinite;
+        }
+
+        .cta {
+            font-size: 28px;
+            font-weight: 700;
+            margin-top: 30px;
+            animation: float-text 3s ease-in-out infinite;
+        }
+
+        @keyframes float-text {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* Add fade-in animation for main sections */
+        .section-content {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.23, 1, 0.320, 1);
+        }
+
+        .section-content.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Enhanced scroll indicator */
+        .scroll-indicator {
+            position: fixed;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 30px;
+            height: 50px;
+            border: 2px solid #00ffff;
+            border-radius: 25px;
+            z-index: 100;
+            transition: all 0.3s ease;
+        }
+
+        .scroll-indicator:hover {
+            transform: translateX(-50%) scale(1.1);
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+        }
+
+        .scroll-indicator::before {
+            content: '';
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 6px;
+            height: 6px;
+            background: #00ffff;
+            border-radius: 50%;
+            animation: scroll-down 2s infinite;
+        }
+
+        @keyframes scroll-down {
+            0% { top: 10px; opacity: 1; }
+            100% { top: 30px; opacity: 0; }
+        }
+
+        @media (max-width: 768px) {
+            .glitch { font-size: 48px; }
+            .subtitle { font-size: 24px; }
+            .section-title { font-size: 32px; }
+            pre { font-size: 14px; }
+        }
+
+        /* Enhanced Mobile Responsiveness */
+        @media (max-width: 1200px) {
+            .container {
+                max-width: 90%;
+                padding: 30px 15px;
+            }
+            
+            .glitch {
+                font-size: 60px;
+            }
+            
+            .section-title {
+                font-size: 42px;
+                margin: 60px 0 30px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px 10px;
+            }
+
+            .hero {
+                min-height: 90vh;
+                padding: 40px 0;
+            }
+
+            .glitch {
+                font-size: 42px;
+                line-height: 1.2;
+            }
+
+            .subtitle {
+                font-size: 20px;
+                margin-bottom: 15px;
+            }
+
+            .role-badge {
+                font-size: 16px;
+                padding: 12px 25px;
+                margin-top: 15px;
+            }
+
+            .code-section {
+                padding: 25px 20px;
+                margin: 40px 0;
+                border-radius: 15px;
+            }
+
+            pre {
+                font-size: 12px;
+                line-height: 1.6;
+                overflow-x: auto;
+            }
+
+            .section-title {
+                font-size: 28px;
+                margin: 50px 0 25px;
+            }
+
+            .section-content p {
+                font-size: 16px !important;
+                margin: 20px 0 !important;
+            }
+
+            .grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+                margin: 30px 0;
+            }
+
+            .card {
+                padding: 25px 20px;
+                border-radius: 15px;
+            }
+
+            .card-title {
+                font-size: 20px;
+                margin-bottom: 12px;
+            }
+
+            .card-description {
+                font-size: 14px;
+                line-height: 1.5;
+            }
+
+            .tech-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+                margin: 30px 0;
+            }
+
+            .tech-category {
+                padding: 20px;
+                border-radius: 12px;
+            }
+
+            .tech-title {
+                font-size: 18px;
+                margin-bottom: 12px;
+            }
+
+            .tech-list li {
+                padding: 6px 0;
+                font-size: 14px;
+            }
+
+            .expertise-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+                margin: 30px 0;
+            }
+
+            .expertise-item {
+                padding: 15px;
+                font-size: 14px;
+                border-radius: 8px;
+            }
+
+            .approach-item {
+                padding: 20px;
+                margin: 15px 0;
+                font-size: 16px;
+                border-radius: 12px;
+            }
+
+            .approach-item:hover {
+                padding-left: 60px;
+            }
+
+            .approach-item::before {
+                font-size: 30px;
+                left: -40px;
+            }
+
+            .approach-item:hover::before {
+                left: 15px;
+            }
+
+            .footer {
+                padding: 40px 15px;
+                margin-top: 60px;
+            }
+
+            .quote {
+                font-size: 18px;
+                margin: 20px 0;
+                line-height: 1.4;
+            }
+
+            .cta {
+                font-size: 22px;
+                margin-top: 20px;
+                line-height: 1.3;
+            }
+
+            .scroll-indicator {
+                width: 25px;
+                height: 40px;
+                bottom: 30px;
+            }
+
+            .github-link {
+                font-size: 14px;
+                padding: 10px 20px;
+                margin: 15px 5px 0;
+            }
+
+            .github-icon {
+                font-size: 16px;
+                margin-right: 6px;
+            }
+
+            .cursor,
+            .cursor-follower {
+                display: none;
+            }
+
+            body {
+                cursor: auto;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 15px 8px;
+            }
+
+            .glitch {
+                font-size: 32px;
+                margin-bottom: 15px;
+            }
+
+            .subtitle {
+                font-size: 18px;
+            }
+
+            .role-badge {
+                font-size: 14px;
+                padding: 10px 20px;
+            }
+
+            .code-section {
+                padding: 20px 15px;
+                margin: 30px 0;
+            }
+
+            pre {
+                font-size: 11px;
+                line-height: 1.4;
+            }
+
+            .section-title {
+                font-size: 24px;
+                margin: 40px 0 20px;
+            }
+
+            .section-content p {
+                font-size: 14px !important;
+                line-height: 1.6 !important;
+            }
+
+            .card {
+                padding: 20px 15px;
+            }
+
+            .card-title {
+                font-size: 18px;
+            }
+
+            .card-description {
+                font-size: 13px;
+            }
+
+            .tech-category {
+                padding: 15px;
+            }
+
+            .tech-title {
+                font-size: 16px;
+            }
+
+            .tech-list li {
+                font-size: 13px;
+                padding: 5px 0;
+            }
+
+            .expertise-item {
+                padding: 12px;
+                font-size: 13px;
+            }
+
+            .approach-item {
+                padding: 15px;
+                font-size: 14px;
+            }
+
+            .github-link {
+                font-size: 12px;
+                padding: 8px 16px;
+                margin: 10px 0;
+                display: inline-block;
+            }
+
+            .github-icon {
+                font-size: 14px;
+            }
+
+            .quote {
+                font-size: 16px;
+            }
+
+            .cta {
+                font-size: 18px;
+            }
+
+            .scroll-indicator {
+                width: 20px;
+                height: 35px;
+                bottom: 20px;
+            }
+        }
+
+        @media (max-width: 320px) {
+            .glitch {
+                font-size: 28px;
+            }
+
+            .subtitle {
+                font-size: 16px;
+            }
+
+            .section-title {
+                font-size: 22px;
+            }
+
+            .card,
+            .tech-category,
+            .expertise-item,
+            .approach-item {
+                padding: 15px 12px;
+            }
+
+            .approach-item:hover {
+                padding-left: 50px;
+            }
+        }
+
+        /* Tablet Landscape */
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .container {
+                max-width: 95%;
+                padding: 35px 20px;
+            }
+
+            .glitch {
+                font-size: 65px;
+            }
+
+            .subtitle {
+                font-size: 28px;
+            }
+
+            .section-title {
+                font-size: 40px;
+            }
+
+            .grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 25px;
+            }
+
+            .tech-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 18px;
+            }
+
+            .expertise-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* Large Screens */
+        @media (min-width: 1400px) {
+            .container {
+                max-width: 1200px;
+            }
+
+            .glitch {
+                font-size: 90px;
+            }
+
+            .subtitle {
+                font-size: 36px;
+            }
+
+            .section-title {
+                font-size: 52px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="cursor"></div>
+    <div class="cursor-follower"></div>
+
+    <div class="bg-animation" id="bgAnimation"></div>
+
+    <div class="container">
+        <section class="hero">
+            <div class="glitch-wrapper">
+                <h1 class="glitch">AKASH CHAUHAN</h1>
+            </div>
+            <p class="subtitle">Frontend Developer @ Simform</p>
+            <div class="role-badge">3.5+ Years of Experience</div>
+            <a href="https://github.com/Akash52" target="_blank" rel="noopener noreferrer" class="github-link">
+                <span class="github-icon">⚡</span>GitHub Profile
+            </a>
+        </section>
+
+        <div class="code-section">
+            <pre><code><span class="key">const</span> akash = <span class="bracket">{</span>
+  <span class="key">role:</span> <span class="string">"Frontend Multistack Developer"</span>,
+  <span class="key">experience:</span> <span class="string">"3.5+ years"</span>,
+  <span class="key">location:</span> <span class="string">"India"</span>,
+  <span class="key">education:</span> <span class="string">"Bachelor's in Information Technology"</span>,
+  <span class="key">passion:</span> <span class="string">"Crafting digital solutions that matter"</span>,
+  <span class="key">techStack:</span> <span class="bracket">{</span>
+    <span class="key">frontend:</span> <span class="bracket">[</span><span class="string">"React"</span>, <span class="string">"Vue.js"</span>, <span class="string">"Angular"</span>, <span class="string">"TypeScript"</span>, <span class="string">"JavaScript"</span><span class="bracket">]</span>,
+    <span class="key">styling:</span> <span class="bracket">[</span><span class="string">"CSS3"</span>, <span class="string">"TailwindCSS"</span>, <span class="string">"Bootstrap"</span>, <span class="string">"Vuetify"</span><span class="bracket">]</span>,
+    <span class="key">tools:</span> <span class="bracket">[</span><span class="string">"Git"</span>, <span class="string">"VS Code"</span>, <span class="string">"Redux"</span><span class="bracket">]</span>,
+    <span class="key">focus:</span> <span class="bracket">[</span><span class="string">"API Integration"</span>, <span class="string">"Performance Optimization"</span>, <span class="string">"Enterprise Solutions"</span><span class="bracket">]</span>
+  <span class="bracket">}</span>
+<span class="bracket">}</span>;</code></pre>
+        </div>
+
+        <section class="section-content">
+            <h2 class="section-title">What I Do</h2>
+            <p style="font-size: 20px; line-height: 1.8; margin: 30px 0;">
+                I specialize in building <strong style="color: #00ffff;">responsive, user-friendly, and scalable web applications</strong> using <strong style="color: #ff00ff;">ReactJS, VueJS, and Angular</strong>. My expertise includes <strong style="color: #ffff00;">translating design concepts</strong> into functional interfaces, <strong style="color: #00ffff;">integrating APIs</strong>, and <strong style="color: #ff00ff;">optimizing performance</strong> for enterprise-level solutions.
+            </p>
+            <p style="font-size: 18px; line-height: 1.8; margin: 20px 0; color: #ccc;">
+                With <strong style="color: #00ffff;">end-to-end exposure</strong> to frontend development — from <strong style="color: #ff00ff;">requirement analysis</strong> and <strong style="color: #ffff00;">UI/UX implementation</strong> to <strong style="color: #00ffff;">API integration and deployment</strong> — I've sharpened my <strong style="color: #ff00ff;">teamwork and problem-solving skills</strong> while delivering impactful solutions.
+            </p>
+        </section>
+
+        <section class="section-content">
+            <h2 class="section-title">Key Projects</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3 class="card-title">Business Case Study Platform</h3>
+                    <p class="card-description">Showcasing past project case studies to clients, enhancing transparency and trust through interactive presentations and comprehensive project documentation.</p>
+                </div>
+                <div class="card">
+                    <h3 class="card-title">CV Management Portal</h3>
+                    <p class="card-description">A centralized system for storing and sharing employee CVs with clients efficiently, streamlining recruitment processes and improving client communications.</p>
+                </div>
+                <div class="card">
+                    <h3 class="card-title">Gender Equality & Inclusion Analytics Platform</h3>
+                    <p class="card-description">Providing organizations with data-driven insights for inclusive decision-making through comprehensive analytics dashboards and reporting tools.</p>
+                </div>
+                <div class="card">
+                    <h3 class="card-title">School Behavior Tracking & Management System</h3>
+                    <p class="card-description">Supporting schools in tracking student behavior, creating intervention plans, and training teachers with intuitive management tools and real-time monitoring.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section-content">
+            <h2 class="section-title">Tech Stack</h2>
+            <div class="tech-grid">
+                <div class="tech-category">
+                    <h3 class="tech-title">Frontend</h3>
+                    <ul class="tech-list">
+                        <li>React</li>
+                        <li>Vue.js</li>
+                        <li>Angular</li>
+                        <li>TypeScript</li>
+                        <li>JavaScript</li>
+                    </ul>
+                </div>
+                <div class="tech-category">
+                    <h3 class="tech-title">Styling</h3>
+                    <ul class="tech-list">
+                        <li>CSS3</li>
+                        <li>TailwindCSS</li>
+                        <li>Bootstrap</li>
+                        <li>Vuetify</li>
+                    </ul>
+                </div>
+                <div class="tech-category">
+                    <h3 class="tech-title">Tools</h3>
+                    <ul class="tech-list">
+                        <li>Git</li>
+                        <li>VS Code</li>
+                        <li>Redux</li>
+                    </ul>
+                </div>
+                <div class="tech-category">
+                    <h3 class="tech-title">Focus Areas</h3>
+                    <ul class="tech-list">
+                        <li>API Integration</li>
+                        <li>Performance Optimization</li>
+                        <li>Enterprise Solutions</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="section-content">
+            <h2 class="section-title">Expertise</h2>
+            <div class="expertise-grid">
+                <div class="expertise-item">Responsive web applications</div>
+                <div class="expertise-item">UI/UX implementation</div>
+                <div class="expertise-item">End-to-end frontend development</div>
+                <div class="expertise-item">Enterprise-level solutions</div>
+            </div>
+        </section>
+
+        <section class="section-content">
+            <h2 class="section-title">My Approach</h2>
+            <ul class="approach-list">
+                <li class="approach-item">End-to-end frontend development: from requirement analysis to deployment</li>
+                <li class="approach-item">Clean, efficient, and impactful code: maintainable & scalable solutions</li>
+                <li class="approach-item">Strong teamwork & problem-solving mindset: collaborative development approach</li>
+                <li class="approach-item">Performance optimization: delivering enterprise-ready applications</li>
+                <li class="approach-item">UI/UX implementation: translating design concepts into functional interfaces</li>
+            </ul>
+        </section>
+
+        <footer class="footer">
+            <p class="quote">"I'm passionate about creating clean, efficient, and impactful web applications that truly make a difference. I'm excited about the opportunity to contribute my expertise to innovative teams and build something amazing together!"</p>
+            <p class="cta">Ready to collaborate? Let's connect and create exceptional digital experiences!</p>
+            <div style="margin-top: 30px;">
+                <a href="https://github.com/Akash52" target="_blank" rel="noopener noreferrer" class="github-link">
+                    <span class="github-icon">🚀</span>Explore My GitHub
+                </a>
+            </div>
+        </footer>
+    </div>
+
+    <div class="scroll-indicator"></div>
+
+    <script>
+        // Custom Cursor - Only for desktop
+        const cursor = document.querySelector('.cursor');
+        const cursorFollower = document.querySelector('.cursor-follower');
+        const isMobileDevice = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth <= 768;
+
+        if (!isMobileDevice) {
+            document.addEventListener('mousemove', (e) => {
+                cursor.style.left = e.clientX + 'px';
+                cursor.style.top = e.clientY + 'px';
+                
+                setTimeout(() => {
+                    cursorFollower.style.left = e.clientX + 'px';
+                    cursorFollower.style.top = e.clientY + 'px';
+                }, 100);
+            });
+        } else {
+            cursor.style.display = 'none';
+            cursorFollower.style.display = 'none';
+            document.body.style.cursor = 'auto';
+        }
+
+        // Animated Background Particles - Reduced for mobile
+        const bgAnimation = document.getElementById('bgAnimation');
+        const particleCount = isMobileDevice ? 20 : 50; // Fewer particles on mobile for performance
+        
+        for (let i = 0; i < particleCount; i++) {
+            const particle = document.createElement('div');
+            particle.classList.add('particle');
+            const size = isMobileDevice ? Math.random() * 6 + 3 : Math.random() * 10 + 5;
+            particle.style.width = size + 'px';
+            particle.style.height = particle.style.width;
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.top = Math.random() * 100 + '%';
+            particle.style.animationDelay = Math.random() * 20 + 's';
+            particle.style.animationDuration = (Math.random() * 20 + 10) + 's';
+            bgAnimation.appendChild(particle);
+        }
+
+        // Scroll Indicator Hide on Scroll
+        window.addEventListener('scroll', () => {
+            const scrollIndicator = document.querySelector('.scroll-indicator');
+            if (window.scrollY > 100) {
+                scrollIndicator.style.opacity = '0';
+            } else {
+                scrollIndicator.style.opacity = '1';
+            }
+        });
+
+        // Enhanced Card Tilt Effect with mobile detection
+        const cards = document.querySelectorAll('.card');
+        const isMobile = window.innerWidth <= 768;
+        
+        if (!isMobile) {
+            cards.forEach(card => {
+                card.addEventListener('mousemove', (e) => {
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+                    
+                    const rotateX = (y - centerY) / 10;
+                    const rotateY = (centerX - x) / 10;
+                    
+                    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-10px)`;
+                });
+                
+                card.addEventListener('mouseleave', () => {
+                    card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateY(0)';
+                });
+            });
+        }
+
+        // Mobile-friendly touch interactions
+        if (isMobile) {
+            cards.forEach(card => {
+                card.addEventListener('touchstart', () => {
+                    card.style.transform = 'scale(0.98)';
+                });
+                
+                card.addEventListener('touchend', () => {
+                    card.style.transform = 'scale(1)';
+                });
+            });
+        }
+
+        // Enhanced Intersection Observer for smooth animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    // Add staggered delay for smoother animations
+                    setTimeout(() => {
+                        entry.target.classList.add('animate');
+                    }, index * 100);
+                }
+            });
+        }, observerOptions);
+
+        // Observe all animated elements
+        document.querySelectorAll('.card, .tech-category, .expertise-item, .approach-item, .section-title, .section-content').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Add parallax effect to background particles - Disabled on mobile for performance
+        if (!isMobileDevice) {
+            window.addEventListener('scroll', () => {
+                const scrolled = window.pageYOffset;
+                const particles = document.querySelectorAll('.particle');
+                
+                particles.forEach((particle, index) => {
+                    const speed = 0.5 + (index % 3) * 0.2;
+                    particle.style.transform = `translateY(${scrolled * speed}px)`;
+                });
+            });
+        }
+
+        // Enhanced scroll indicator with smooth hide/show
+        let scrollTimeout;
+        window.addEventListener('scroll', () => {
+            const scrollIndicator = document.querySelector('.scroll-indicator');
+            const scrollPosition = window.scrollY;
+            
+            clearTimeout(scrollTimeout);
+            
+            if (scrollPosition > 100) {
+                scrollIndicator.style.opacity = '0';
+                scrollIndicator.style.transform = 'translateX(-50%) translateY(20px)';
+            } else {
+                scrollIndicator.style.opacity = '1';
+                scrollIndicator.style.transform = 'translateX(-50%) translateY(0)';
+            }
+        });
+
+        // Window resize handler for responsive adjustments
+        window.addEventListener('resize', () => {
+            const newIsMobile = window.innerWidth <= 768;
+            if (newIsMobile !== isMobile) {
+                location.reload(); // Reload to apply mobile/desktop specific features
+            }
+        });
+    </script>
+</body>
+</html>
