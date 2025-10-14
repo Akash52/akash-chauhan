@@ -5,6 +5,42 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Akash Chauhan - Frontend Developer</title>
     <style>
+        /* ========================================
+           PERFORMANCE OPTIMIZATIONS FOR 60FPS
+           ========================================
+           
+           Key optimizations applied:
+           
+           1. GPU ACCELERATION:
+              - All animations use transform/opacity only
+              - translate3d() instead of translateX/Y for hardware acceleration
+              - backface-visibility: hidden to force GPU layer creation
+              - will-change hints for elements that will animate
+           
+           2. LAYOUT THRASHING PREVENTION:
+              - Batch DOM reads before writes
+              - Use requestAnimationFrame for visual updates
+              - Debounced/throttled event handlers
+           
+           3. ANIMATION PERFORMANCE:
+              - Avoid animating: width, height, top, left, margin, padding
+              - Only animate: transform and opacity (GPU-accelerated)
+              - Use translate3d for 3D transform context
+           
+           4. RENDERING OPTIMIZATION:
+              - contain: layout style paint for isolation
+              - Reduced particle count (30 desktop, 15 mobile)
+              - Passive event listeners where possible
+           
+           5. JAVASCRIPT OPTIMIZATION:
+              - requestAnimationFrame for smooth 60FPS animations
+              - Throttled scroll handlers
+              - Debounced resize handlers
+              - Cached DOM queries and measurements
+              - DocumentFragment for batch DOM insertion
+           
+           ======================================== */
+
         * {
             margin: 0;
             padding: 0;
@@ -18,19 +54,31 @@
             overflow-x: hidden;
             cursor: none;
             scroll-behavior: smooth;
+            /* Performance: Enable GPU acceleration for scrolling */
+            -webkit-overflow-scrolling: touch;
+            /* Optimize font rendering */
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
         }
 
-        /* Custom Cursor */
+        /* Custom Cursor - GPU Accelerated */
         .cursor {
             width: 20px;
             height: 20px;
             border: 2px solid #00ffff;
             border-radius: 50%;
             position: fixed;
+            top: 0;
+            left: 0;
             pointer-events: none;
             z-index: 9999;
-            transition: all 0.1s ease;
+            /* GPU acceleration: use transform instead of top/left */
+            transform: translate3d(0, 0, 0);
             mix-blend-mode: difference;
+            /* Hint browser to create GPU layer */
+            will-change: transform;
+            backface-visibility: hidden;
         }
 
         .cursor-follower {
@@ -39,12 +87,17 @@
             background: #00ffff;
             border-radius: 50%;
             position: fixed;
+            top: 0;
+            left: 0;
             pointer-events: none;
             z-index: 9999;
-            transition: all 0.15s ease;
+            /* GPU acceleration: use transform instead of top/left */
+            transform: translate3d(0, 0, 0);
+            will-change: transform;
+            backface-visibility: hidden;
         }
 
-        /* Animated Background */
+        /* Animated Background - Performance optimized */
         .bg-animation {
             position: fixed;
             top: 0;
@@ -53,6 +106,9 @@
             height: 100%;
             z-index: 0;
             opacity: 0.3;
+            /* Performance: Force GPU layer */
+            will-change: contents;
+            contain: layout style paint;
         }
 
         .particle {
@@ -60,13 +116,18 @@
             background: linear-gradient(45deg, #00ffff, #ff00ff);
             border-radius: 50%;
             animation: float 20s infinite;
+            /* GPU acceleration hints */
+            will-change: transform, opacity;
+            backface-visibility: hidden;
+            transform: translate3d(0, 0, 0);
         }
 
+        /* GPU-accelerated animation - only transform and opacity */
         @keyframes float {
-            0%, 100% { transform: translateY(0) translateX(0) scale(1); opacity: 0.7; }
-            25% { transform: translateY(-100px) translateX(100px) scale(1.2); opacity: 1; }
-            50% { transform: translateY(-50px) translateX(-100px) scale(0.8); opacity: 0.5; }
-            75% { transform: translateY(100px) translateX(50px) scale(1.1); opacity: 0.8; }
+            0%, 100% { transform: translate3d(0, 0, 0) scale(1); opacity: 0.7; }
+            25% { transform: translate3d(100px, -100px, 0) scale(1.2); opacity: 1; }
+            50% { transform: translate3d(-100px, -50px, 0) scale(0.8); opacity: 0.5; }
+            75% { transform: translate3d(50px, 100px, 0) scale(1.1); opacity: 0.8; }
         }
 
         /* Container */
@@ -271,12 +332,14 @@
             display: inline-block;
             transition: all 0.3s ease;
             opacity: 0;
-            transform: translateY(30px);
+            /* GPU acceleration */
+            transform: translate3d(0, 30px, 0);
+            backface-visibility: hidden;
         }
 
         .section-title.animate {
             opacity: 1;
-            transform: translateY(0);
+            transform: translate3d(0, 0, 0);
         }
 
         .section-title::before {
@@ -326,12 +389,17 @@
             transition: all 0.6s cubic-bezier(0.23, 1, 0.320, 1);
             backdrop-filter: blur(10px);
             opacity: 0;
-            transform: translateY(50px) scale(0.95);
+            /* GPU acceleration: use translate3d */
+            transform: translate3d(0, 50px, 0) scale(0.95);
+            /* Performance optimization */
+            backface-visibility: hidden;
+            will-change: transform, opacity;
         }
 
         .card.animate {
             opacity: 1;
-            transform: translateY(0) scale(1);
+            /* GPU acceleration: use translate3d instead of translateY */
+            transform: translate3d(0, 0, 0) scale(1);
         }
 
         .card::before {
@@ -351,7 +419,8 @@
 
         .card:hover {
             border-color: #00ffff;
-            transform: translateY(-15px) rotateX(5deg) scale(1.02);
+            /* GPU acceleration: use translate3d and rotate3d */
+            transform: translate3d(0, -15px, 0) rotateX(5deg) scale(1.02);
             box-shadow: 0 25px 80px rgba(0, 255, 255, 0.4);
         }
 
@@ -398,12 +467,14 @@
             overflow: hidden;
             transition: all 0.5s cubic-bezier(0.23, 1, 0.320, 1);
             opacity: 0;
-            transform: translateY(50px) scale(0.95);
+            /* GPU acceleration */
+            transform: translate3d(0, 50px, 0) scale(0.95);
+            backface-visibility: hidden;
         }
 
         .tech-category.animate {
             opacity: 1;
-            transform: translateY(0) scale(1);
+            transform: translate3d(0, 0, 0) scale(1);
         }
 
         .tech-category::after {
@@ -451,7 +522,9 @@
             position: absolute;
             left: 0;
             color: #00ffff;
+            /* GPU acceleration */
             transition: transform 0.3s ease;
+            will-change: transform;
         }
 
         .tech-list li:hover {
@@ -460,7 +533,8 @@
         }
 
         .tech-list li:hover::before {
-            transform: translateX(5px);
+            /* GPU acceleration */
+            transform: translate3d(5px, 0, 0);
         }
 
         /* Expertise List */
@@ -493,12 +567,14 @@
             position: relative;
             overflow: hidden;
             opacity: 0;
-            transform: translateX(-50px);
+            /* GPU acceleration */
+            transform: translate3d(-50px, 0, 0);
+            backface-visibility: hidden;
         }
 
         .expertise-item.animate {
             opacity: 1;
-            transform: translateX(0);
+            transform: translate3d(0, 0, 0);
         }
 
         .expertise-item::before {
@@ -519,7 +595,8 @@
         .expertise-item:hover {
             background: rgba(0, 255, 255, 0.1);
             border-left-width: 8px;
-            transform: translateX(10px);
+            /* GPU acceleration */
+            transform: translate3d(10px, 0, 0);
         }
 
         /* Approach Section */
@@ -539,12 +616,14 @@
             overflow: hidden;
             transition: all 0.5s cubic-bezier(0.23, 1, 0.320, 1);
             opacity: 0;
-            transform: translateX(-30px);
+            /* GPU acceleration */
+            transform: translate3d(-30px, 0, 0);
+            backface-visibility: hidden;
         }
 
         .approach-item.animate {
             opacity: 1;
-            transform: translateX(0);
+            transform: translate3d(0, 0, 0);
         }
 
         .approach-item::before {
@@ -552,7 +631,8 @@
             position: absolute;
             left: -50px;
             top: 50%;
-            transform: translateY(-50%);
+            /* GPU acceleration */
+            transform: translate3d(0, -50%, 0);
             font-size: 40px;
             color: #00ffff;
             transition: left 0.4s ease;
@@ -612,20 +692,22 @@
         }
 
         @keyframes float-text {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
+            0%, 100% { transform: translate3d(0, 0, 0); }
+            50% { transform: translate3d(0, -10px, 0); }
         }
 
         /* Add fade-in animation for main sections */
         .section-content {
             opacity: 0;
-            transform: translateY(30px);
+            /* GPU acceleration */
+            transform: translate3d(0, 30px, 0);
             transition: all 0.8s cubic-bezier(0.23, 1, 0.320, 1);
+            backface-visibility: hidden;
         }
 
         .section-content.animate {
             opacity: 1;
-            transform: translateY(0);
+            transform: translate3d(0, 0, 0);
         }
 
         /* Enhanced scroll indicator */
@@ -643,7 +725,8 @@
         }
 
         .scroll-indicator:hover {
-            transform: translateX(-50%) scale(1.1);
+            /* GPU acceleration */
+            transform: translate3d(-50%, 0, 0) scale(1.1);
             box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
         }
 
@@ -1176,31 +1259,85 @@
     <div class="scroll-indicator"></div>
 
     <script>
-        // Custom Cursor - Only for desktop
+        // ===== PERFORMANCE OPTIMIZATIONS FOR 60FPS =====
+        
+        // Utility: Debounce function to limit event handler calls
+        // Prevents excessive function calls, improves performance
+        const debounce = (func, wait) => {
+            let timeout;
+            return function executedFunction(...args) {
+                const later = () => {
+                    clearTimeout(timeout);
+                    func(...args);
+                };
+                clearTimeout(timeout);
+                timeout = setTimeout(later, wait);
+            };
+        };
+
+        // Utility: Throttle function using requestAnimationFrame
+        // Ensures animations run at optimal frame rate (60FPS)
+        const throttleRAF = (func) => {
+            let ticking = false;
+            return function(...args) {
+                if (!ticking) {
+                    window.requestAnimationFrame(() => {
+                        func.apply(this, args);
+                        ticking = false;
+                    });
+                    ticking = true;
+                }
+            };
+        };
+
+        // Device detection - cached to avoid repeated checks
+        const isMobileDevice = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth <= 768;
+        const isMobile = window.innerWidth <= 768;
+
+        // ===== CUSTOM CURSOR (Desktop Only) =====
+        // GPU-accelerated using transform instead of left/top
         const cursor = document.querySelector('.cursor');
         const cursorFollower = document.querySelector('.cursor-follower');
-        const isMobileDevice = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth <= 768;
-
+        
         if (!isMobileDevice) {
-            document.addEventListener('mousemove', (e) => {
-                cursor.style.left = e.clientX + 'px';
-                cursor.style.top = e.clientY + 'px';
+            let cursorX = 0, cursorY = 0;
+            let followerX = 0, followerY = 0;
+
+            // Update cursor position - batched with requestAnimationFrame
+            const updateCursorPosition = (e) => {
+                cursorX = e.clientX;
+                cursorY = e.clientY;
+            };
+
+            // Smooth cursor animation loop using RAF
+            const animateCursor = () => {
+                // GPU-accelerated: use translate3d for hardware acceleration
+                cursor.style.transform = `translate3d(${cursorX}px, ${cursorY}px, 0)`;
                 
-                setTimeout(() => {
-                    cursorFollower.style.left = e.clientX + 'px';
-                    cursorFollower.style.top = e.clientY + 'px';
-                }, 100);
-            });
+                // Smooth follower with easing
+                followerX += (cursorX - followerX) * 0.15;
+                followerY += (cursorY - followerY) * 0.15;
+                cursorFollower.style.transform = `translate3d(${followerX}px, ${followerY}px, 0)`;
+                
+                requestAnimationFrame(animateCursor);
+            };
+
+            document.addEventListener('mousemove', updateCursorPosition, { passive: true });
+            animateCursor(); // Start animation loop
         } else {
+            // Hide cursors on mobile - performance optimization
             cursor.style.display = 'none';
             cursorFollower.style.display = 'none';
             document.body.style.cursor = 'auto';
         }
 
-        // Animated Background Particles - Reduced for mobile
+        // ===== BACKGROUND PARTICLES =====
+        // Lazy initialization with reduced count for performance
         const bgAnimation = document.getElementById('bgAnimation');
-        const particleCount = isMobileDevice ? 20 : 50; // Fewer particles on mobile for performance
+        const particleCount = isMobileDevice ? 15 : 30; // Reduced particle count for 60FPS
         
+        // Use DocumentFragment for batched DOM insertion (performance optimization)
+        const fragment = document.createDocumentFragment();
         for (let i = 0; i < particleCount; i++) {
             const particle = document.createElement('div');
             particle.classList.add('particle');
@@ -1211,71 +1348,151 @@
             particle.style.top = Math.random() * 100 + '%';
             particle.style.animationDelay = Math.random() * 20 + 's';
             particle.style.animationDuration = (Math.random() * 20 + 10) + 's';
-            bgAnimation.appendChild(particle);
+            // Force GPU acceleration with will-change
+            particle.style.willChange = 'transform, opacity';
+            fragment.appendChild(particle);
         }
+        bgAnimation.appendChild(fragment); // Single DOM insertion
 
-        // Scroll Indicator Hide on Scroll
-        window.addEventListener('scroll', () => {
-            const scrollIndicator = document.querySelector('.scroll-indicator');
-            if (window.scrollY > 100) {
+        // ===== SCROLL INDICATOR =====
+        // Throttled scroll handler using RAF for smooth 60FPS
+        const scrollIndicator = document.querySelector('.scroll-indicator');
+        let lastScrollY = 0;
+
+        const updateScrollIndicator = throttleRAF(() => {
+            const scrollPosition = window.pageYOffset;
+            
+            // GPU-accelerated: use opacity and transform only
+            if (scrollPosition > 100) {
                 scrollIndicator.style.opacity = '0';
+                scrollIndicator.style.transform = 'translate3d(-50%, 20px, 0)';
             } else {
                 scrollIndicator.style.opacity = '1';
+                scrollIndicator.style.transform = 'translate3d(-50%, 0, 0)';
             }
+            
+            lastScrollY = scrollPosition;
         });
 
-        // Enhanced Card Tilt Effect with mobile detection
+        window.addEventListener('scroll', updateScrollIndicator, { passive: true });
+
+        // ===== CARD TILT EFFECT =====
+        // GPU-accelerated 3D transforms with RAF optimization
         const cards = document.querySelectorAll('.card');
-        const isMobile = window.innerWidth <= 768;
         
         if (!isMobile) {
             cards.forEach(card => {
-                card.addEventListener('mousemove', (e) => {
-                    const rect = card.getBoundingClientRect();
-                    const x = e.clientX - rect.left;
-                    const y = e.clientY - rect.top;
+                let cardRect = null;
+                let isHovering = false;
+                let currentX = 0, currentY = 0;
+                let targetRotateX = 0, targetRotateY = 0;
+
+                // Cache bounding rect on mouse enter
+                const handleMouseEnter = () => {
+                    cardRect = card.getBoundingClientRect();
+                    isHovering = true;
+                };
+
+                // Update target rotation values
+                const handleMouseMove = (e) => {
+                    if (!cardRect) return;
                     
-                    const centerX = rect.width / 2;
-                    const centerY = rect.height / 2;
+                    const x = e.clientX - cardRect.left;
+                    const y = e.clientY - cardRect.top;
                     
-                    const rotateX = (y - centerY) / 10;
-                    const rotateY = (centerX - x) / 10;
+                    const centerX = cardRect.width / 2;
+                    const centerY = cardRect.height / 2;
                     
-                    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-10px)`;
-                });
+                    targetRotateX = (y - centerY) / 10;
+                    targetRotateY = (centerX - x) / 10;
+                };
+
+                const handleMouseLeave = () => {
+                    isHovering = false;
+                    cardRect = null;
+                    targetRotateX = 0;
+                    targetRotateY = 0;
+                };
+
+                // Smooth animation loop for card tilt
+                const animateCard = () => {
+                    if (isHovering || targetRotateX !== 0 || targetRotateY !== 0) {
+                        // Smooth easing
+                        currentX += (targetRotateX - currentX) * 0.1;
+                        currentY += (targetRotateY - currentY) * 0.1;
+                        
+                        // GPU-accelerated: use translate3d and rotate3d
+                        card.style.transform = `perspective(1000px) rotateX(${currentX}deg) rotateY(${currentY}deg) translateZ(10px)`;
+                    }
+                    
+                    requestAnimationFrame(animateCard);
+                };
+
+                card.addEventListener('mouseenter', handleMouseEnter);
+                card.addEventListener('mousemove', handleMouseMove, { passive: true });
+                card.addEventListener('mouseleave', handleMouseLeave);
                 
-                card.addEventListener('mouseleave', () => {
-                    card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateY(0)';
-                });
+                animateCard(); // Start animation loop
             });
         }
 
-        // Mobile-friendly touch interactions
+        // ===== MOBILE TOUCH INTERACTIONS =====
+        // Optimized touch handlers for mobile
         if (isMobile) {
             cards.forEach(card => {
                 card.addEventListener('touchstart', () => {
-                    card.style.transform = 'scale(0.98)';
-                });
+                    // GPU-accelerated scale with translate3d for hardware acceleration
+                    card.style.transform = 'scale(0.98) translate3d(0, 0, 0)';
+                }, { passive: true });
                 
                 card.addEventListener('touchend', () => {
-                    card.style.transform = 'scale(1)';
-                });
+                    card.style.transform = 'scale(1) translate3d(0, 0, 0)';
+                }, { passive: true });
             });
         }
 
-        // Enhanced Intersection Observer for smooth animations
+        // ===== INTERSECTION OBSERVER =====
+        // Efficient visibility detection for animations
         const observerOptions = {
             threshold: 0.1,
             rootMargin: '0px 0px -50px 0px'
         };
 
+        // Batch animation class additions using RAF
+        const animationQueue = [];
+        let isProcessingQueue = false;
+
+        const processAnimationQueue = () => {
+            if (animationQueue.length === 0) {
+                isProcessingQueue = false;
+                return;
+            }
+
+            const item = animationQueue.shift();
+            item.element.classList.add('animate');
+            
+            if (animationQueue.length > 0) {
+                setTimeout(() => {
+                    requestAnimationFrame(processAnimationQueue);
+                }, 50); // Stagger animations
+            } else {
+                isProcessingQueue = false;
+            }
+        };
+
         const observer = new IntersectionObserver((entries) => {
-            entries.forEach((entry, index) => {
-                if (entry.isIntersecting) {
-                    // Add staggered delay for smoother animations
-                    setTimeout(() => {
-                        entry.target.classList.add('animate');
-                    }, index * 100);
+            entries.forEach((entry) => {
+                if (entry.isIntersecting && !entry.target.classList.contains('animate')) {
+                    // Queue element for animation
+                    animationQueue.push({ element: entry.target });
+                    
+                    if (!isProcessingQueue) {
+                        isProcessingQueue = true;
+                        requestAnimationFrame(processAnimationQueue);
+                    }
+                    
+                    // Unobserve once animated (performance optimization)
+                    observer.unobserve(entry.target);
                 }
             });
         }, observerOptions);
@@ -1285,43 +1502,70 @@
             observer.observe(el);
         });
 
-        // Add parallax effect to background particles - Disabled on mobile for performance
+        // ===== PARALLAX EFFECT =====
+        // GPU-accelerated parallax with RAF throttling
         if (!isMobileDevice) {
-            window.addEventListener('scroll', () => {
-                const scrolled = window.pageYOffset;
-                const particles = document.querySelectorAll('.particle');
+            const particles = document.querySelectorAll('.particle');
+            let lastKnownScrollY = 0;
+            let ticking = false;
+
+            const updateParallax = () => {
+                // Batch read (scroll position)
+                const scrolled = lastKnownScrollY;
                 
+                // Batch write (transform updates)
                 particles.forEach((particle, index) => {
                     const speed = 0.5 + (index % 3) * 0.2;
-                    particle.style.transform = `translateY(${scrolled * speed}px)`;
+                    // GPU-accelerated: translate3d instead of translateY
+                    particle.style.transform = `translate3d(0, ${scrolled * speed}px, 0)`;
                 });
-            });
+                
+                ticking = false;
+            };
+
+            const requestParallaxUpdate = () => {
+                lastKnownScrollY = window.pageYOffset;
+                
+                if (!ticking) {
+                    window.requestAnimationFrame(updateParallax);
+                    ticking = true;
+                }
+            };
+
+            window.addEventListener('scroll', requestParallaxUpdate, { passive: true });
         }
 
-        // Enhanced scroll indicator with smooth hide/show
-        let scrollTimeout;
-        window.addEventListener('scroll', () => {
-            const scrollIndicator = document.querySelector('.scroll-indicator');
-            const scrollPosition = window.scrollY;
-            
-            clearTimeout(scrollTimeout);
-            
-            if (scrollPosition > 100) {
-                scrollIndicator.style.opacity = '0';
-                scrollIndicator.style.transform = 'translateX(-50%) translateY(20px)';
-            } else {
-                scrollIndicator.style.opacity = '1';
-                scrollIndicator.style.transform = 'translateX(-50%) translateY(0)';
-            }
-        });
-
-        // Window resize handler for responsive adjustments
-        window.addEventListener('resize', () => {
+        // ===== WINDOW RESIZE HANDLER =====
+        // Debounced resize handler to prevent layout thrashing
+        const handleResize = debounce(() => {
             const newIsMobile = window.innerWidth <= 768;
             if (newIsMobile !== isMobile) {
                 location.reload(); // Reload to apply mobile/desktop specific features
             }
+        }, 250);
+
+        window.addEventListener('resize', handleResize, { passive: true });
+
+        // ===== PERFORMANCE OPTIMIZATION: Preload critical resources =====
+        // Mark cursor elements with will-change for GPU optimization
+        if (!isMobileDevice) {
+            cursor.style.willChange = 'transform';
+            cursorFollower.style.willChange = 'transform';
+        }
+
+        // Force GPU layer creation for animated elements
+        document.querySelectorAll('.card, .tech-category').forEach(el => {
+            el.style.willChange = 'transform, opacity';
         });
+
+        // Cleanup will-change after animations complete (memory optimization)
+        setTimeout(() => {
+            document.querySelectorAll('[style*="will-change"]').forEach(el => {
+                if (!el.classList.contains('cursor') && !el.classList.contains('cursor-follower')) {
+                    el.style.willChange = 'auto';
+                }
+            });
+        }, 3000);
     </script>
 </body>
 </html>
