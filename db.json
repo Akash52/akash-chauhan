@@ -1,0 +1,234 @@
+{
+  "profile": {
+    "name": "Akash Chauhan",
+    "title": "Senior Frontend Multi-Stack Developer",
+    "company": "Simform Solutions",
+    "companyUrl": "https://www.simform.com",
+    "location": "Palitana, Gujarat, India",
+    "phone": "+91 7285801867",
+    "experience": "3.5+",
+    "role": "Mentor",
+    "productionProjects": 3,
+    "pocs": 3,
+    "email": "ac8572611@gmail.com",
+    "avatar": "https://avatars.githubusercontent.com/u/31063892?v=4",
+    "skills": ["ReactJS", "VueJS", "Angular", "Nuxt 3", "TypeScript"],
+    "summary": "Results-driven Senior Frontend Multi-Stack Developer with 3.5+ years of hands-on experience crafting responsive, performant, and scalable web applications. Deep expertise across ReactJS, VueJS, and Angular, enabling seamless adaptation to diverse technology ecosystems and delivering high-impact solutions under tight deadlines.",
+    "highlights": "Architected enterprise-grade platforms, championed knowledge sharing through technical blogs, department training sessions, and created an AI Prompt Library (v1.2) with 25+ production-ready prompts benefiting the entire Vue.js department."
+  },
+  "social": [
+    {
+      "name": "GitHub",
+      "url": "https://github.com/Akash52",
+      "icon": "github"
+    },
+    {
+      "name": "LinkedIn",
+      "url": "https://linkedin.com/in/akash-chauhan",
+      "icon": "linkedin"
+    },
+    {
+      "name": "Medium",
+      "url": "https://medium.com/@19it197.akashbhai.chauhan",
+      "icon": "medium"
+    }
+  ],
+  "projects": [
+    {
+      "name": "SecondSelf Platform",
+      "description": "Complete Vue 3 + TypeScript platform with Pinia state management. Implemented comprehensive route guard system (authentication, verification, subscription) for Creator/Fan/Admin roles. Created reusable composables and secure API service layer with XSS prevention.",
+      "icon": "robot",
+      "tags": ["Vue 3", "TypeScript", "Pinia", "Ant Design Vue"]
+    },
+    {
+      "name": "ITB Discovery",
+      "description": "Mastered Angular ecosystem within 2 weeks. Implemented comprehensive SignalR integration for real-time notifications and broadcast features. Created robust global drawer service and reusable Apache ECharts integration for data visualization.",
+      "icon": "signal",
+      "tags": ["Angular", "TypeScript", "NG-Zorro", "SignalR"]
+    },
+    {
+      "name": "Equilo Analytics Platform",
+      "description": "Data-driven analytics platform for organizational inclusive decision-making and gender equality metrics. Mastered Chart.js integration for complex data visualization. Led frontend technical decisions and requirement gathering.",
+      "icon": "chart",
+      "tags": ["Vue 3", "Nuxt 3", "Pinia", "TypeScript"]
+    },
+    {
+      "name": "Case Study Builder",
+      "description": "Showcased past project case studies to clients, enhancing transparency and trust. R&D on RevealJS (Presentation library) and seamless integration. Implemented Microsoft 365 login using MSAL with Nuxt 3.",
+      "icon": "clipboard",
+      "tags": ["Vue 3", "Nuxt 3", "TypeScript", "MSAL"]
+    },
+    {
+      "name": "CV Management Portal",
+      "description": "Led development of centralized system for storing and sharing employee CVs. Managed team of 2 developers. Handled communication, presentation, and requirement gathering. Delivered high-quality work within timeline.",
+      "icon": "document",
+      "tags": ["Vue 3", "Nuxt 3", "Pinia", "TypeScript"]
+    },
+    {
+      "name": "CareLink 360",
+      "description": "Maintained and debugged legacy codebase with Cloudflare integration. Created comprehensive handover documentation with issue workflows and log analysis steps. Fixed production bugs marked in Release Planner.",
+      "icon": "heart",
+      "tags": ["Sails.js", "Node.js", "jQuery", "MySQL"]
+    },
+    {
+      "name": "School Behavior Tracking",
+      "description": "Supported schools in tracking student behavior and creating intervention plans. Developed teacher training modules for comprehensive behavior management.",
+      "icon": "education",
+      "tags": ["Angular", "NG-Zorro", "EdTech"]
+    }
+  ],
+  "pocs": [
+    {
+      "name": "React Query POC",
+      "description": "Implemented caching strategies (staleTime, gcTime, deduplication). Built optimistic updates and infinite scroll patterns.",
+      "tags": ["React", "TypeScript", "TanStack Query"]
+    },
+    {
+      "name": "Event-Driven Architecture Warehouse",
+      "description": "Frontend event handling with event sourcing patterns. Implemented DLQ (Dead Letter Queue) and replay mechanisms.",
+      "tags": ["React", "TypeScript"]
+    },
+    {
+      "name": "Restaurant Monorepo",
+      "description": "Monorepo architecture with frontend billing logic. Demonstrated workspace and dependency management.",
+      "tags": ["React", "TypeScript", "Turborepo"]
+    }
+  ],
+  "techStack": {
+    "frameworks": [
+      { "name": "JavaScript (ES6+)", "proficiency": 5 },
+      { "name": "TypeScript", "proficiency": 5 },
+      { "name": "Vue.js / Nuxt 3", "proficiency": 5 },
+      { "name": "ReactJS", "proficiency": 4 },
+      { "name": "Angular", "proficiency": 4 }
+    ],
+    "state": [
+      { "name": "TanStack Query", "proficiency": 5 },
+      { "name": "Pinia / Vuex", "proficiency": 5 },
+      { "name": "Redux Toolkit", "proficiency": 4 },
+      { "name": "NgRx / RxJS", "proficiency": 4 }
+    ],
+    "ui": [
+      { "name": "Tailwind CSS", "proficiency": 5 },
+      { "name": "Ant Design Vue", "proficiency": 5 },
+      { "name": "Vuetify", "proficiency": 4 },
+      { "name": "NG-Zorro", "proficiency": 4 },
+      { "name": "Material-UI", "proficiency": 4 }
+    ],
+    "backend": [
+      { "name": "Node.js / Express", "proficiency": 4 },
+      { "name": "MongoDB / MySQL", "proficiency": 4 },
+      { "name": "REST APIs / GraphQL", "proficiency": 5 },
+      { "name": "SignalR (Real-time)", "proficiency": 4 }
+    ],
+    "tools": [
+      { "name": "Git / VS Code", "proficiency": 5 },
+      { "name": "Vite / Turborepo", "proficiency": 5 },
+      { "name": "Jest / Vue Test Utils", "proficiency": 4 },
+      { "name": "PWA Development", "proficiency": 4 }
+    ]
+  },
+  "articles": [
+    {
+      "title": "TanStack Query: The Data Fetching Solution You've Been Looking For",
+      "url": "https://medium.com/@19it197.akashbhai.chauhan/tanstack-query-the-data-fetching-solution-youve-been-looking-for"
+    },
+    {
+      "title": "How I Moved My App from Nuxt 3 to Nuxt 4",
+      "url": "https://medium.com/simform-engineering/how-i-successfully-migrated-my-production-app-from-nuxt-3-to-nuxt-4-0b7379d0743d"
+    },
+    {
+      "title": "PWA Utilizing Six Popular Technologies",
+      "url": "https://medium.com/simform-engineering/building-awesome-pwas-using-six-leading-frontend-frameworks-61bb7c280c4f"
+    },
+    {
+      "title": "SOLID Principles - In-depth Guide",
+      "url": "https://medium.com/simform-engineering/decoding-solid-principles-practical-insights-with-real-world-scenarios-ed8af65421b5"
+    },
+    {
+      "title": "Design Systems Implementation - Atomic Design Methodology",
+      "url": "https://medium.com/@19it197.akashbhai.chauhan/from-pixels-to-patterns-a-hands-on-guide-to-design-systems-c9001c050450"
+    }
+  ],
+  "experience": [
+    {
+      "title": "Senior Software Engineer",
+      "company": "Simform Solutions",
+      "location": "Ahmedabad, Gujarat",
+      "startDate": "April 2022",
+      "endDate": "Present",
+      "duration": "3.5+ years",
+      "description": "Multi-Stack Frontend Developer · Mentor",
+      "details": "Delivered 3 production projects (ITB Discovery, SecondSelf, CareLink 360) and 3 POCs simultaneously. Successfully transitioned across 3 major frameworks (Angular, Vue, React) within 6 months. Conducted department-level SignalR training. Created AI Prompt Library (v1.2) with 25+ production-ready prompts."
+    },
+    {
+      "title": "Software Engineer Trainee",
+      "company": "Simform Solutions",
+      "location": "Ahmedabad, Gujarat",
+      "startDate": "January 2022",
+      "endDate": "April 2022",
+      "duration": "4 months",
+      "description": "Completed intensive training in JavaScript, ReactJS, VueJS, TypeScript. Learned Redux, Redux Toolkit, Vuex, Vuetify, Tailwind CSS. Built demos using Vue 3 with Jest & Vue Test Utils. Participated in company Hackathon."
+    }
+  ],
+  "education": [
+    {
+      "degree": "Bachelor of Engineering in Information Technology",
+      "school": "VVP Engineering College, Rajkot",
+      "years": "August 2019 - May 2022",
+      "cgpa": "8.64"
+    },
+    {
+      "degree": "Diploma in Information Technology",
+      "school": "Lukhdhirji Engineering College, Morbi",
+      "years": "August 2016 - June 2019",
+      "cgpa": "8.10"
+    },
+    {
+      "degree": "10th GSEB",
+      "school": "Swaminarayan Gurukul School, Palitana",
+      "years": "March 2015 - March 2016",
+      "percentage": "60%"
+    }
+  ],
+  "certifications": [
+    "JavaScript Essential Training - LinkedIn Learning",
+    "ReactJS Essential Training - LinkedIn Learning",
+    "NodeJS Essential Training - LinkedIn Learning",
+    "MERN Essential Training - LinkedIn Learning",
+    "Learning REST APIs - LinkedIn Learning",
+    "React Component Development Training",
+    "Advanced RxJS Training",
+    "Angular Signals Training"
+  ],
+  "achievements": [
+    "Successfully transitioned across 3 major frameworks (Angular → Vue → React) within 6 months while maintaining code quality",
+    "Delivered 3 production projects and 3 POCs simultaneously",
+    "Led CV Builder project team of 3 members",
+    "Created AI Prompt Library benefiting entire Vue.js department",
+    "MYSY Scholarship Scholar (every year)",
+    "Completed Hacktoberfest 2020 Challenge"
+  ],
+  "openSource": [
+    {
+      "name": "Awesome JavaScript Collection",
+      "description": "Open-source collection of 30+ JavaScript projects",
+      "url": "https://github.com/Akash52"
+    },
+    {
+      "name": "GitHub Finder",
+      "description": "Application displaying GitHub user profiles and repositories",
+      "url": "https://github.com/Akash52"
+    }
+  ],
+  "training": [
+    {
+      "title": "Department-level SignalR Training",
+      "description": "Conducted training session on SignalR integration for real-time features"
+    },
+    {
+      "title": "AI Prompt Library v1.2",
+      "description": "Created 25+ production-ready prompts for Vue.js department covering Code Refactoring, Debugging, Architecture Design, API Integration, Security, Testing, Performance, Accessibility, Documentation, App Modernization"
+    }
+  ]
+}
