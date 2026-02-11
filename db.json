@@ -6,14 +6,14 @@
     "companyUrl": "https://www.simform.com",
     "location": "Palitana, Gujarat, India",
     "phone": "+91 7285801867",
-    "experience": "3.5+",
+    "experience": "4+",
     "role": "Mentor",
     "productionProjects": 3,
     "pocs": 3,
     "email": "ac8572611@gmail.com",
     "avatar": "https://avatars.githubusercontent.com/u/31063892?v=4",
-    "skills": ["ReactJS", "VueJS", "Angular", "Nuxt 3", "TypeScript"],
-    "summary": "Results-driven Senior Frontend Multi-Stack Developer with 3.5+ years of hands-on experience crafting responsive, performant, and scalable web applications. Deep expertise across ReactJS, VueJS, and Angular, enabling seamless adaptation to diverse technology ecosystems and delivering high-impact solutions under tight deadlines.",
+    "skills": ["ReactJS", "VueJS", "Angular", "JavaScript", "TypeScript"],
+    "summary": "Results-driven Senior Frontend Multi-Stack Developer with 4+ years of hands-on experience crafting responsive, performant, and scalable web applications. Deep expertise across ReactJS, VueJS, and Angular, enabling seamless adaptation to diverse technology ecosystems and delivering high-impact solutions under tight deadlines.",
     "highlights": "Architected enterprise-grade platforms, championed knowledge sharing through technical blogs, department training sessions, and created an AI Prompt Library (v1.2) with 25+ production-ready prompts benefiting the entire Vue.js department."
   },
   "social": [
@@ -69,12 +69,6 @@
       "description": "Maintained and debugged legacy codebase with Cloudflare integration. Created comprehensive handover documentation with issue workflows and log analysis steps. Fixed production bugs marked in Release Planner.",
       "icon": "heart",
       "tags": ["Sails.js", "Node.js", "jQuery", "MySQL"]
-    },
-    {
-      "name": "School Behavior Tracking",
-      "description": "Supported schools in tracking student behavior and creating intervention plans. Developed teacher training modules for comprehensive behavior management.",
-      "icon": "education",
-      "tags": ["Angular", "NG-Zorro", "EdTech"]
     }
   ],
   "pocs": [
@@ -157,7 +151,7 @@
       "location": "Ahmedabad, Gujarat",
       "startDate": "April 2022",
       "endDate": "Present",
-      "duration": "3.5+ years",
+      "duration": "4+ years",
       "description": "Multi-Stack Frontend Developer · Mentor",
       "details": "Delivered 3 production projects (ITB Discovery, SecondSelf, CareLink 360) and 3 POCs simultaneously. Successfully transitioned across 3 major frameworks (Angular, Vue, React) within 6 months. Conducted department-level SignalR training. Created AI Prompt Library (v1.2) with 25+ production-ready prompts."
     },
