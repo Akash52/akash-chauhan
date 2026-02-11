@@ -170,19 +170,15 @@
       "degree": "Bachelor of Engineering in Information Technology",
       "school": "VVP Engineering College, Rajkot",
       "years": "August 2019 - May 2022",
-      "cgpa": "8.64"
+      "cgpa": "8.64",
+      "website": "https://vvpedulink.ac.in/"
     },
     {
       "degree": "Diploma in Information Technology",
       "school": "Lukhdhirji Engineering College, Morbi",
       "years": "August 2016 - June 2019",
-      "cgpa": "8.10"
-    },
-    {
-      "degree": "10th GSEB",
-      "school": "Swaminarayan Gurukul School, Palitana",
-      "years": "March 2015 - March 2016",
-      "percentage": "60%"
+      "cgpa": "8.10",
+      "website": "https://www.lecollege.ac.in/"
     }
   ],
   "certifications": [
