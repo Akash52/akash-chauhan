@@ -36,9 +36,9 @@
   "projects": [
     {
       "name": "SecondSelf Platform",
-      "description": "Complete Vue 3 + TypeScript platform with Pinia state management. Implemented comprehensive route guard system (authentication, verification, subscription) for Creator/Fan/Admin roles. Created reusable composables and secure API service layer with XSS prevention.",
+      "description": "AI-powered creator-fan interaction platform built with Vue 3 + TypeScript. Architected complete frontend with Pinia state management, comprehensive route guard system (authentication, verification, subscription) for Creator/Fan/Admin roles. Implemented real-time chat system, Stripe payment integration, onboarding flows, and OAuth (Google/Apple). Created reusable composables, secure API service layer with XSS prevention, and responsive UI using Ant Design Vue with SCSS.",
       "icon": "robot",
-      "tags": ["Vue 3", "TypeScript", "Pinia", "Ant Design Vue"]
+      "tags": ["Vue 3", "TypeScript", "Pinia", "Ant Design Vue", "Stripe", "OAuth", "Real-time Chat"]
     },
     {
       "name": "ITB Discovery",
