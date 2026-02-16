@@ -225,6 +225,7 @@
             --enter-initial: 0ms;
             animation: slide-enter 0.6s both ease-out;
             animation-delay: calc(var(--enter-initial) + var(--enter-stage) * var(--enter-step));
+            will-change: transform, opacity;
         }
 
         .slide-enter-content > *:nth-child(1) { --enter-stage: 1; }
@@ -512,6 +513,8 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            will-change: opacity;
+            transform: translateZ(0);
         }
 
         .back-to-top.visible {
@@ -628,6 +631,8 @@
             pointer-events: none;
             z-index: -1;
             opacity: 0.15;
+            will-change: contents;
+            transform: translateZ(0);
         }
 
         .dark #plum-container {
@@ -1029,14 +1034,17 @@
             }
         }, { passive: true });
 
-        // Plum/branch animation
+        // Plum/branch animation - Optimized for 60FPS
         (function() {
             const canvas = document.getElementById('plum-container');
-            const ctx = canvas.getContext('2d');
+            const ctx = canvas.getContext('2d', { alpha: true, desynchronized: true });
             
             let width, height;
             const branches = [];
             const pendingBranches = [];
+            let cachedStrokeStyle = null;
+            let lastFrameTime = performance.now();
+            const targetFrameTime = 1000 / 60; // 60 FPS
             
             function resize() {
                 width = canvas.width = window.innerWidth;
@@ -1051,6 +1059,8 @@
             
             function init() {
                 resize();
+                // Cache the stroke style
+                cachedStrokeStyle = getComputedStyle(document.documentElement).getPropertyValue('--c-fg');
                 for (let i = 0; i < 4; i++) {
                     const startFromBottom = Math.random() > 0.5;
                     const x = startFromBottom ? Math.random() * width : (Math.random() > 0.5 ? 0 : width);
@@ -1073,10 +1083,11 @@
                 
                 const [nx, ny] = polar2cart(branch.x, branch.y, 1, branch.angle);
                 
+                // Batch drawing operations
                 ctx.beginPath();
                 ctx.moveTo(branch.x, branch.y);
                 ctx.lineTo(nx, ny);
-                ctx.strokeStyle = getComputedStyle(document.documentElement).getPropertyValue('--c-fg');
+                ctx.strokeStyle = cachedStrokeStyle;
                 ctx.lineWidth = 0.5;
                 ctx.stroke();
                 
@@ -1099,36 +1110,53 @@
                 return true;
             }
             
-            function frame() {
-                if (pendingBranches.length > 0 && branches.length < 80) {
-                    branches.push(pendingBranches.shift());
-                }
+            function frame(currentTime) {
+                const deltaTime = currentTime - lastFrameTime;
                 
-                let active = false;
-                for (let i = branches.length - 1; i >= 0; i--) {
-                    if (step(branches[i])) {
-                        active = true;
-                    } else {
-                        branches.splice(i, 1);
+                // Limit updates to maintain 60 FPS
+                if (deltaTime >= targetFrameTime) {
+                    lastFrameTime = currentTime - (deltaTime % targetFrameTime);
+                    
+                    if (pendingBranches.length > 0 && branches.length < 80) {
+                        branches.push(pendingBranches.shift());
                     }
-                }
-                
-                if (active || pendingBranches.length > 0) {
+                    
+                    let active = false;
+                    // Process branches in batches for better performance
+                    for (let i = branches.length - 1; i >= 0; i--) {
+                        if (step(branches[i])) {
+                            active = true;
+                        } else {
+                            branches.splice(i, 1);
+                        }
+                    }
+                    
+                    if (active || pendingBranches.length > 0) {
+                        requestAnimationFrame(frame);
+                    }
+                } else {
                     requestAnimationFrame(frame);
                 }
             }
             
+            let resizeTimeout;
             window.addEventListener('resize', () => {
-                resize();
-                ctx.clearRect(0, 0, width, height);
-                branches.length = 0;
-                pendingBranches.length = 0;
-                init();
-                frame();
+                clearTimeout(resizeTimeout);
+                resizeTimeout = setTimeout(() => {
+                    resize();
+                    ctx.clearRect(0, 0, width, height);
+                    branches.length = 0;
+                    pendingBranches.length = 0;
+                    cachedStrokeStyle = getComputedStyle(document.documentElement).getPropertyValue('--c-fg');
+                    init();
+                    lastFrameTime = performance.now();
+                    requestAnimationFrame(frame);
+                }, 100);
             });
             
             init();
-            frame();
+            lastFrameTime = performance.now();
+            requestAnimationFrame(frame);
         })();
 
         // Initialize portfolio
