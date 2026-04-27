@@ -135,12 +135,23 @@
 
         /* Navigation */
         nav {
-            padding: 2rem;
+            padding: 0.85rem 2rem;
             width: 100%;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            position: relative;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--c-border);
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+
+        html.dark nav {
+            background: rgba(5, 5, 5, 0.85);
         }
 
         .nav-logo {
@@ -182,6 +193,11 @@
             opacity: 1;
         }
 
+        .nav-links a.active {
+            opacity: 1;
+            color: var(--c-accent);
+        }
+
         .theme-toggle {
             background: none;
             border: none;
@@ -202,7 +218,7 @@
 
         /* Main Content */
         main {
-            max-width: 65ch;
+            max-width: 72ch;
             margin: 0 auto;
             padding: 0 1.75rem 6rem;
         }
@@ -332,7 +348,8 @@
         /* Project Cards */
         .projects-grid {
             display: grid;
-            gap: 1rem;
+            gap: 0.75rem;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
         }
 
         .project-item {
@@ -597,7 +614,7 @@
         /* Responsive */
         @media (max-width: 640px) {
             nav {
-                padding: 1.5rem 1rem;
+                padding: 0.65rem 1rem;
             }
 
             main {
@@ -619,6 +636,10 @@
             .project-item {
                 padding: 0.75rem 0.5rem;
             }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
         }
 
         /* Plum background effect */
@@ -637,6 +658,74 @@
 
         .dark #plum-container {
             opacity: 0.08;
+        }
+
+        /* Angular Consulting Section */
+        .consulting-intro {
+            font-size: 0.95rem;
+            line-height: 1.7;
+            opacity: 0.9;
+            margin-bottom: 1.25rem;
+        }
+
+        .consulting-focus {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.75rem;
+        }
+
+        .consulting-focus-tag {
+            font-size: 0.75rem;
+            padding: 0.2rem 0.6rem;
+            border: 1px solid var(--c-accent);
+            color: var(--c-accent);
+            border-radius: 20px;
+            opacity: 0.8;
+        }
+
+        .consulting-period {
+            font-size: 0.8rem;
+            opacity: 0.5;
+            margin-bottom: 1rem;
+            font-family: monospace;
+        }
+
+        .clients-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+            gap: 0.65rem;
+        }
+
+        .client-card {
+            padding: 0.75rem 1rem;
+            border: 1px solid var(--c-border);
+            border-radius: 8px;
+            transition: border-color 0.2s, background-color 0.2s;
+        }
+
+        .client-card:hover {
+            border-color: var(--c-accent);
+            background-color: rgba(136, 136, 136, 0.05);
+        }
+
+        .client-name {
+            font-weight: 600;
+            color: var(--c-fg-deeper);
+            font-size: 0.95rem;
+        }
+
+        .client-domain {
+            font-size: 0.78rem;
+            opacity: 0.5;
+            margin-top: 0.15rem;
+        }
+
+        .client-note {
+            font-size: 0.78rem;
+            color: var(--c-accent);
+            margin-top: 0.2rem;
+            opacity: 0.85;
         }
 
         /* Print styles */
@@ -659,8 +748,11 @@
             <img src="" alt="Akash Chauhan" id="nav-avatar">
         </a>
         <div class="nav-links">
-            <a href="#projects">Projects</a>
-            <a href="#articles">Blog</a>
+            <a href="#experience"><span>Experience</span></a>
+            <a href="#projects"><span>Projects</span></a>
+            <a href="#consulting"><span>Consulting</span></a>
+            <a href="#tech"><span>Stack</span></a>
+            <a href="#articles"><span>Blog</span></a>
             <a href="https://github.com/Akash52" target="_blank" title="GitHub">
                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
             </a>
@@ -706,6 +798,29 @@
             external: `<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" x2="21" y1="14" y2="3"/></svg>`
         };
 
+        // Auto-calculate duration between two date strings ("Month YYYY" or "Present")
+        function calcDuration(startStr, endStr) {
+            const toDate = s => (!s || s === 'Present') ? new Date() : new Date(s);
+            const start = toDate(startStr);
+            const end = toDate(endStr);
+            const totalMonths = (end.getFullYear() - start.getFullYear()) * 12 + (end.getMonth() - start.getMonth());
+            const years = Math.floor(totalMonths / 12);
+            const months = totalMonths % 12;
+            if (years === 0) return `${months} mo`;
+            if (months === 0) return `${years} yr${years > 1 ? 's' : ''}`;
+            return `${years} yr${years > 1 ? 's' : ''} ${months} mo`;
+        }
+
+        // Auto-calculate total years from a career start date (returns e.g. "4+")
+        function calcYearsFrom(startStr) {
+            const start = new Date(startStr);
+            const now = new Date();
+            const years = now.getFullYear() - start.getFullYear() -
+                (now.getMonth() < start.getMonth() ||
+                (now.getMonth() === start.getMonth() && now.getDate() < start.getDate()) ? 1 : 0);
+            return years + '+';
+        }
+
         // Generate star rating
         function generateStars(proficiency) {
             let stars = '';
@@ -727,7 +842,7 @@
                 </p>
 
                 <p>
-                    Working at <a href="${profile.companyUrl}" target="_blank">${profile.company}</a> for ${profile.experience} years<br>
+                    Working at <a href="${profile.companyUrl}" target="_blank">${profile.company}</a> for ${calcYearsFrom(profile.careerStartDate)} years<br>
                     Building with ${skillsHTML}<br>
                 </p>
 
@@ -842,7 +957,7 @@
                             <span class="experience-title">${exp.title}</span>
                             <span class="experience-company"> @ ${exp.company}</span>
                         </div>
-                        <span class="experience-date">${exp.startDate} - ${exp.endDate} · ${exp.duration}</span>
+                        <span class="experience-date">${exp.startDate} - ${exp.endDate} · ${calcDuration(exp.startDate, exp.endDate)}</span>
                     </div>
                     <p class="experience-desc">
                         ${exp.description}${exp.details ? `<br>${exp.details}` : ''}
@@ -938,6 +1053,34 @@
             `;
         }
 
+        // Render Angular consulting section
+        function renderAngularConsulting(consulting) {
+            if (!consulting) return '';
+
+            const focusHTML = consulting.focus.map(f =>
+                `<span class="consulting-focus-tag">${f}</span>`
+            ).join('');
+
+            const clientsHTML = consulting.clients.map(client => `
+                <div class="client-card">
+                    <div class="client-name">${client.name}</div>
+                    <div class="client-domain">${client.domain}</div>
+                    ${client.note ? `<div class="client-note">${client.note}</div>` : ''}
+                </div>
+            `).join('');
+
+            return `
+                <hr>
+                <section id="consulting">
+                    <h2 class="section-title">Angular Consulting & Support</h2>
+                    <div class="consulting-period">${consulting.period}</div>
+                    <p class="consulting-intro">${consulting.description}</p>
+                    <div class="consulting-focus">${focusHTML}</div>
+                    <div class="clients-grid">${clientsHTML}</div>
+                </section>
+            `;
+        }
+
         // Main render function
         async function renderPortfolio() {
             try {
@@ -956,13 +1099,28 @@
                 mainContent.innerHTML = `
                     ${renderProfile(data.profile)}
                     ${renderSocial(data.social, data.profile.email)}
-                    ${renderProjects(data.projects)}
-                    ${renderPOCs(data.pocs)}
-                    ${renderTechStack(data.techStack)}
-                    ${renderArticles(data.articles, mediumUrl)}
                     ${renderExperience(data.experience)}
+                    ${renderProjects(data.projects)}
+                    ${renderAngularConsulting(data.angularConsulting)}
+                    ${renderTechStack(data.techStack)}
+                    ${renderPOCs(data.pocs)}
+                    ${renderArticles(data.articles, mediumUrl)}
                     ${renderEducation(data.education)}
                 `;
+
+                // Active nav section highlighting
+                const navLinks = document.querySelectorAll('.nav-links a[href^="#"]');
+                const sections = document.querySelectorAll('section[id]');
+                const sectionObserver = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            navLinks.forEach(a => a.classList.remove('active'));
+                            const active = document.querySelector(`.nav-links a[href="#${entry.target.id}"]`);
+                            if (active) active.classList.add('active');
+                        }
+                    });
+                }, { rootMargin: '-30% 0px -60% 0px' });
+                sections.forEach(s => sectionObserver.observe(s));
                 
                 // Re-apply smooth scroll for anchor links
                 document.querySelectorAll('a[href^="#"]').forEach(anchor => {

@@ -6,9 +6,9 @@
     "companyUrl": "https://www.simform.com",
     "location": "Palitana, Gujarat, India",
     "phone": "+91 7285801867",
-    "experience": "4+",
+    "careerStartDate": "April 26, 2022",
     "role": "Mentor",
-    "productionProjects": 3,
+    "productionProjects": 5,
     "pocs": 3,
     "email": "ac8572611@gmail.com",
     "avatar": "https://avatars.githubusercontent.com/u/31063892?v=4",
@@ -35,40 +35,46 @@
   ],
   "projects": [
     {
-      "name": "SecondSelf Platform",
+      "name": "Internal Workflow & Productivity Platform",
+      "description": "Currently building an internal enterprise workflow and productivity management platform. Handling frontend architecture, component development, and cross-team collaboration within the Vue.js department. Active project — Feb 2026 to present.",
+      "icon": "chart",
+      "tags": ["Vue 3", "TypeScript", "Internal Tooling", "Active"]
+    },
+    {
+      "name": "AI Creator & Fan Interaction Platform",
       "description": "AI-powered creator-fan interaction platform built with Vue 3 + TypeScript. Architected complete frontend with Pinia state management, comprehensive route guard system (authentication, verification, subscription) for Creator/Fan/Admin roles. Implemented real-time chat system, Stripe payment integration, onboarding flows, and OAuth (Google/Apple). Created reusable composables, secure API service layer with XSS prevention, and responsive UI using Ant Design Vue with SCSS.",
       "icon": "robot",
       "tags": ["Vue 3", "TypeScript", "Pinia", "Ant Design Vue", "Stripe", "OAuth", "Real-time Chat"]
     },
     {
-      "name": "ITB Discovery",
-      "description": "Mastered Angular ecosystem within 2 weeks. Implemented comprehensive SignalR integration for real-time notifications and broadcast features. Created robust global drawer service and reusable Apache ECharts integration for data visualization.",
+      "name": "Enterprise Real-Time Discovery Platform",
+      "description": "Rapidly mastered the Angular ecosystem within 2 weeks of project onboarding. Implemented comprehensive SignalR integration for real-time notifications and broadcast features. Created robust global drawer service and reusable Apache ECharts integration for data visualization.",
       "icon": "signal",
       "tags": ["Angular", "TypeScript", "NG-Zorro", "SignalR"]
     },
     {
-      "name": "Equilo Analytics Platform",
-      "description": "Data-driven analytics platform for organizational inclusive decision-making and gender equality metrics. Mastered Chart.js integration for complex data visualization. Led frontend technical decisions and requirement gathering.",
+      "name": "Healthcare Management Platform",
+      "description": "Maintained and debugged legacy codebase with Cloudflare integration. Created comprehensive handover documentation with issue workflows and log analysis steps. Fixed production bugs marked in Release Planner.",
+      "icon": "heart",
+      "tags": ["Sails.js", "Node.js", "jQuery", "MySQL"]
+    },
+    {
+      "name": "Inclusive Analytics Platform",
+      "description": "Data-driven analytics platform for organizational inclusive decision-making and equity metrics. Mastered Chart.js integration for complex data visualization. Led frontend technical decisions and requirement gathering.",
       "icon": "chart",
       "tags": ["Vue 3", "Nuxt 3", "Pinia", "TypeScript"]
     },
     {
-      "name": "Case Study Builder",
-      "description": "Showcased past project case studies to clients, enhancing transparency and trust. R&D on RevealJS (Presentation library) and seamless integration. Implemented Microsoft 365 login using MSAL with Nuxt 3.",
+      "name": "Client Case Study Builder",
+      "description": "Internal tool to showcase project case studies to clients, enhancing transparency and trust. R&D on RevealJS (Presentation library) and seamless integration. Implemented Microsoft 365 login using MSAL with Nuxt 3.",
       "icon": "clipboard",
       "tags": ["Vue 3", "Nuxt 3", "TypeScript", "MSAL"]
     },
     {
-      "name": "CV Management Portal",
-      "description": "Led development of centralized system for storing and sharing employee CVs. Managed team of 2 developers. Handled communication, presentation, and requirement gathering. Delivered high-quality work within timeline.",
+      "name": "Employee CV Management Portal",
+      "description": "Led development of centralized internal system for storing and sharing employee CVs. Managed a team of 2 developers. Handled client communication, presentation, and requirement gathering. Delivered within timeline.",
       "icon": "document",
       "tags": ["Vue 3", "Nuxt 3", "Pinia", "TypeScript"]
-    },
-    {
-      "name": "CareLink 360",
-      "description": "Maintained and debugged legacy codebase with Cloudflare integration. Created comprehensive handover documentation with issue workflows and log analysis steps. Fixed production bugs marked in Release Planner.",
-      "icon": "heart",
-      "tags": ["Sails.js", "Node.js", "jQuery", "MySQL"]
     }
   ],
   "pocs": [
@@ -151,9 +157,8 @@
       "location": "Ahmedabad, Gujarat",
       "startDate": "April 2022",
       "endDate": "Present",
-      "duration": "4+ years",
       "description": "Multi-Stack Frontend Developer · Mentor",
-      "details": "Delivered 3 production projects (ITB Discovery, SecondSelf, CareLink 360) and 3 POCs simultaneously. Successfully transitioned across 3 major frameworks (Angular, Vue, React) within 6 months. Conducted department-level SignalR training. Created AI Prompt Library (v1.2) with 25+ production-ready prompts."
+      "details": "Delivered 5+ production projects across Angular, Vue 3, and legacy stacks, plus 3 POCs simultaneously. Successfully transitioned across 3 major frameworks within 6 months while maintaining production quality. Conducted department-level SignalR training. Created AI Prompt Library (v1.2) with 25+ production-ready prompts."
     },
     {
       "title": "Software Engineer Trainee",
@@ -161,7 +166,6 @@
       "location": "Ahmedabad, Gujarat",
       "startDate": "January 2022",
       "endDate": "April 2022",
-      "duration": "4 months",
       "description": "Completed intensive training in JavaScript, ReactJS, VueJS, TypeScript. Learned Redux, Redux Toolkit, Vuex, Vuetify, Tailwind CSS. Built demos using Vue 3 with Jest & Vue Test Utils. Participated in company Hackathon."
     }
   ],
@@ -192,13 +196,32 @@
     "Angular Signals Training"
   ],
   "achievements": [
-    "Successfully transitioned across 3 major frameworks (Angular → Vue → React) within 6 months while maintaining code quality",
-    "Delivered 3 production projects and 3 POCs simultaneously",
+    "Successfully transitioned across 3 major frameworks (Angular → Vue → React) within 6 months while maintaining production code quality",
+    "Delivered 5+ production projects across enterprise, healthcare, and analytics domains — plus 3 POCs simultaneously",
     "Led CV Builder project team of 3 members",
     "Created AI Prompt Library benefiting entire Vue.js department",
     "MYSY Scholarship Scholar (every year)",
     "Completed Hacktoberfest 2020 Challenge"
   ],
+  "angularConsulting": {
+    "period": "2021 – Present · 4+ years",
+    "description": "Alongside my full-time role, I've independently provided Angular frontend support to enterprise engineering teams — primarily stack migrations from legacy codebases (AngularJS, React, jQuery) to Angular, component architecture design, and performance hardening. This consulting work pushed my Angular depth far beyond what production projects alone could offer, giving me real exposure to the scale and compliance demands of Fortune 500 engineering.",
+    "focus": ["Angular Migration", "Legacy Modernization", "Component Architecture", "RxJS & NgRx", "Performance Optimization", "Enterprise UI Systems"],
+    "clients": [
+      { "name": "Apple", "domain": "Technology", "note": "RabbitMQ frontend integration" },
+      { "name": "Bank of America", "domain": "Finance" },
+      { "name": "Citi", "domain": "Finance" },
+      { "name": "Delta Airlines", "domain": "Aviation" },
+      { "name": "Infosys–TCS USA", "domain": "Technology Services" },
+      { "name": "Microsoft", "domain": "Technology", "note": "Package Management tooling" },
+      { "name": "Moody's", "domain": "Finance & Analytics" },
+      { "name": "Penske", "domain": "Transportation" },
+      { "name": "PricewaterhouseCoopers", "domain": "Professional Services" },
+      { "name": "UPS", "domain": "Logistics" },
+      { "name": "CVS Healthcare", "domain": "Healthcare" },
+      { "name": "National Cancer Institute", "domain": "Healthcare / Government" }
+    ]
+  },
   "openSource": [
     {
       "name": "Awesome JavaScript Collection",
