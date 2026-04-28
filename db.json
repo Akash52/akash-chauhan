@@ -13,8 +13,8 @@
     "email": "ac8572611@gmail.com",
     "avatar": "https://avatars.githubusercontent.com/u/31063892?v=4",
     "skills": ["ReactJS", "VueJS", "Angular", "JavaScript", "TypeScript"],
-    "summary": "Results-driven Senior Frontend Multi-Stack Developer with 4+ years of hands-on experience crafting responsive, performant, and scalable web applications. Deep expertise across ReactJS, VueJS, and Angular, enabling seamless adaptation to diverse technology ecosystems and delivering high-impact solutions under tight deadlines.",
-    "highlights": "Architected enterprise-grade platforms, championed knowledge sharing through technical blogs, department training sessions, and created an AI Prompt Library (v1.2) with 25+ production-ready prompts benefiting the entire Vue.js department."
+    "summary": "I'm a Senior Frontend Developer with over 4 years of experience building web applications that are fast, accessible, and genuinely enjoyable to use. I've had the pleasure of working across ReactJS, VueJS, and Angular, which has helped me adapt comfortably to different team environments and deliver thoughtful solutions even under tight timelines.",
+    "highlights": "I've had the opportunity to help shape enterprise-scale platforms, share what I've learned through technical writing and department training sessions, and put together an AI Prompt Library (v1.2) featuring 25+ ready-to-use prompts that the entire Vue.js team has found helpful in their day-to-day work."
   },
   "social": [
     {
@@ -36,43 +36,43 @@
   "projects": [
     {
       "name": "Internal Workflow & Productivity Platform",
-      "description": "Currently building an internal enterprise workflow and productivity management platform. Handling frontend architecture, component development, and cross-team collaboration within the Vue.js department. Active project — Feb 2026 to present.",
+      "description": "I'm currently working on an internal workflow and productivity platform for our enterprise teams. It's been a great opportunity to shape the frontend architecture from the ground up, develop reusable components, and collaborate closely with colleagues across the Vue.js department. This one is still actively in progress as of February 2026.",
       "icon": "chart",
       "tags": ["Vue 3", "TypeScript", "Internal Tooling", "Active"]
     },
     {
       "name": "AI Creator & Fan Interaction Platform",
-      "description": "AI-powered creator-fan interaction platform built with Vue 3 + TypeScript. Architected complete frontend with Pinia state management, comprehensive route guard system (authentication, verification, subscription) for Creator/Fan/Admin roles. Implemented real-time chat system, Stripe payment integration, onboarding flows, and OAuth (Google/Apple). Created reusable composables, secure API service layer with XSS prevention, and responsive UI using Ant Design Vue with SCSS.",
+      "description": "This was a really engaging project — an AI-powered platform connecting creators with their fans. I took ownership of the entire frontend, setting up Pinia for state management and building a thorough route guard system that handles authentication, verification, and subscription logic for Creator, Fan, and Admin roles. Along the way I also built out the real-time chat, integrated Stripe payments, handled OAuth sign-ins via Google and Apple, and put together a clean, accessible UI using Ant Design Vue and SCSS.",
       "icon": "robot",
       "tags": ["Vue 3", "TypeScript", "Pinia", "Ant Design Vue", "Stripe", "OAuth", "Real-time Chat"]
     },
     {
       "name": "Enterprise Real-Time Discovery Platform",
-      "description": "Rapidly mastered the Angular ecosystem within 2 weeks of project onboarding. Implemented comprehensive SignalR integration for real-time notifications and broadcast features. Created robust global drawer service and reusable Apache ECharts integration for data visualization.",
+      "description": "Joining this project meant getting up to speed with Angular very quickly — I was contributing meaningfully within two weeks of onboarding, which I'm genuinely proud of. I implemented SignalR to support real-time notifications and broadcasts, built a flexible global drawer service, and wired up Apache ECharts to bring complex data to life visually.",
       "icon": "signal",
       "tags": ["Angular", "TypeScript", "NG-Zorro", "SignalR"]
     },
     {
       "name": "Healthcare Management Platform",
-      "description": "Maintained and debugged legacy codebase with Cloudflare integration. Created comprehensive handover documentation with issue workflows and log analysis steps. Fixed production bugs marked in Release Planner.",
+      "description": "I stepped into a legacy codebase here, which required patience and careful debugging — especially around the Cloudflare integration. I made sure to leave things better than I found them, writing detailed handover documentation that covered issue workflows and log analysis so the next team could hit the ground running. I also resolved all outstanding production bugs listed in the Release Planner.",
       "icon": "heart",
       "tags": ["Sails.js", "Node.js", "jQuery", "MySQL"]
     },
     {
       "name": "Inclusive Analytics Platform",
-      "description": "Data-driven analytics platform for organizational inclusive decision-making and equity metrics. Mastered Chart.js integration for complex data visualization. Led frontend technical decisions and requirement gathering.",
+      "description": "This platform was built to support more equitable, data-informed decision-making within organizations. I deepened my Chart.js skills here to handle some genuinely complex visualisation needs, and I also took the lead on frontend technical decisions and requirement discussions — which was a valuable experience in balancing stakeholder needs with what's practically achievable.",
       "icon": "chart",
       "tags": ["Vue 3", "Nuxt 3", "Pinia", "TypeScript"]
     },
     {
       "name": "Client Case Study Builder",
-      "description": "Internal tool to showcase project case studies to clients, enhancing transparency and trust. R&D on RevealJS (Presentation library) and seamless integration. Implemented Microsoft 365 login using MSAL with Nuxt 3.",
+      "description": "A tool I genuinely enjoyed building — it helps the team present project case studies to clients in a polished, transparent way. I spent time researching RevealJS and got it working smoothly as our presentation engine. I also integrated Microsoft 365 authentication using MSAL, which made the login experience seamless for internal users.",
       "icon": "clipboard",
       "tags": ["Vue 3", "Nuxt 3", "TypeScript", "MSAL"]
     },
     {
       "name": "Employee CV Management Portal",
-      "description": "Led development of centralized internal system for storing and sharing employee CVs. Managed a team of 2 developers. Handled client communication, presentation, and requirement gathering. Delivered within timeline.",
+      "description": "I led a small but capable team of two developers to build a centralised portal for managing and sharing employee CVs internally. Beyond the technical work, I handled client communication and requirement sessions, and presented our progress throughout. I'm happy to say we delivered on time without cutting corners.",
       "icon": "document",
       "tags": ["Vue 3", "Nuxt 3", "Pinia", "TypeScript"]
     }
@@ -80,17 +80,17 @@
   "pocs": [
     {
       "name": "React Query POC",
-      "description": "Implemented caching strategies (staleTime, gcTime, deduplication). Built optimistic updates and infinite scroll patterns.",
+      "description": "A focused exploration of TanStack Query where I dug into its caching model — working through staleTime, gcTime, and deduplication — and then built out some practical patterns like optimistic updates and infinite scroll to see how they behave in a real app context.",
       "tags": ["React", "TypeScript", "TanStack Query"]
     },
     {
       "name": "Event-Driven Architecture Warehouse",
-      "description": "Frontend event handling with event sourcing patterns. Implemented DLQ (Dead Letter Queue) and replay mechanisms.",
+      "description": "This POC was a deep dive into event-driven thinking on the frontend — I explored event sourcing patterns and built out a Dead Letter Queue with replay support, which gave me a much better appreciation for resilient, observable frontend architectures.",
       "tags": ["React", "TypeScript"]
     },
     {
       "name": "Restaurant Monorepo",
-      "description": "Monorepo architecture with frontend billing logic. Demonstrated workspace and dependency management.",
+      "description": "A hands-on experiment with Turborepo-based monorepo structure. I modelled a restaurant billing flow across shared packages and explored how workspace configurations and shared dependencies can be managed cleanly at scale.",
       "tags": ["React", "TypeScript", "Turborepo"]
     }
   ],
@@ -114,12 +114,6 @@
       { "name": "Vuetify", "proficiency": 4 },
       { "name": "NG-Zorro", "proficiency": 4 },
       { "name": "Material-UI", "proficiency": 4 }
-    ],
-    "backend": [
-      { "name": "Node.js / Express", "proficiency": 4 },
-      { "name": "MongoDB / MySQL", "proficiency": 4 },
-      { "name": "REST APIs / GraphQL", "proficiency": 5 },
-      { "name": "SignalR (Real-time)", "proficiency": 4 }
     ],
     "tools": [
       { "name": "Git / VS Code", "proficiency": 5 },
@@ -158,7 +152,7 @@
       "startDate": "April 2022",
       "endDate": "Present",
       "description": "Multi-Stack Frontend Developer · Mentor",
-      "details": "Delivered 5+ production projects across Angular, Vue 3, and legacy stacks, plus 3 POCs simultaneously. Successfully transitioned across 3 major frameworks within 6 months while maintaining production quality. Conducted department-level SignalR training. Created AI Prompt Library (v1.2) with 25+ production-ready prompts."
+      "details": "Over the course of my time here, I've had the privilege of contributing to more than five production projects spanning Angular, Vue 3, and legacy stacks — alongside three POCs running in parallel. One of the things I'm most proud of is navigating three major framework transitions within six months without ever letting production quality slip. I've also had the chance to give back to the team by running a department-wide SignalR training and putting together an AI Prompt Library (v1.2) with over 25 prompts that colleagues use regularly."
     },
     {
       "title": "Software Engineer Trainee",
@@ -166,7 +160,7 @@
       "location": "Ahmedabad, Gujarat",
       "startDate": "January 2022",
       "endDate": "April 2022",
-      "description": "Completed intensive training in JavaScript, ReactJS, VueJS, TypeScript. Learned Redux, Redux Toolkit, Vuex, Vuetify, Tailwind CSS. Built demos using Vue 3 with Jest & Vue Test Utils. Participated in company Hackathon."
+      "description": "My journey at Simform began with an intensive training programme covering JavaScript, ReactJS, VueJS, and TypeScript. I also got hands-on with Redux, Redux Toolkit, Vuex, Vuetify, and Tailwind CSS during this period. I built several demos using Vue 3 together with Jest and Vue Test Utils, and had a great time participating in the company Hackathon."
     }
   ],
   "education": [
@@ -205,7 +199,7 @@
   ],
   "angularConsulting": {
     "period": "2021 – Present · 4+ years",
-    "description": "Alongside my full-time role, I've independently provided Angular frontend support to enterprise engineering teams — primarily stack migrations from legacy codebases (AngularJS, React, jQuery) to Angular, component architecture design, and performance hardening. This consulting work pushed my Angular depth far beyond what production projects alone could offer, giving me real exposure to the scale and compliance demands of Fortune 500 engineering.",
+    "description": "Alongside my full-time role at Simform, I've quietly taken on independent Angular consulting work for enterprise engineering teams. Most of this has involved helping teams move away from ageing codebases — AngularJS, React, jQuery — towards modern Angular, as well as advising on component architecture and shoring up performance. Honestly, this work has stretched my Angular skills in ways that a single production project never could, and has given me a grounded understanding of what it takes to meet the scale and compliance demands that Fortune 500 teams deal with every day.",
     "focus": ["Angular Migration", "Legacy Modernization", "Component Architecture", "RxJS & NgRx", "Performance Optimization", "Enterprise UI Systems"],
     "clients": [
       { "name": "Apple", "domain": "Technology", "note": "RabbitMQ frontend integration" },
@@ -225,23 +219,23 @@
   "openSource": [
     {
       "name": "Awesome JavaScript Collection",
-      "description": "Open-source collection of 30+ JavaScript projects",
+      "description": "A curated open-source collection of more than 30 JavaScript projects — built and shared to help others learn and explore different aspects of the language.",
       "url": "https://github.com/Akash52"
     },
     {
       "name": "GitHub Finder",
-      "description": "Application displaying GitHub user profiles and repositories",
+      "description": "A handy little app for looking up GitHub profiles and browsing repositories — a project I built to practise API integration and clean UI presentation.",
       "url": "https://github.com/Akash52"
     }
   ],
   "training": [
     {
       "title": "Department-level SignalR Training",
-      "description": "Conducted training session on SignalR integration for real-time features"
+      "description": "I had the pleasure of running a department-wide session on integrating SignalR for real-time features. It was a great opportunity to share practical patterns and help colleagues feel more confident working with WebSocket-based communication in their projects."
     },
     {
       "title": "AI Prompt Library v1.2",
-      "description": "Created 25+ production-ready prompts for Vue.js department covering Code Refactoring, Debugging, Architecture Design, API Integration, Security, Testing, Performance, Accessibility, Documentation, App Modernization"
+      "description": "I put together a library of over 25 carefully crafted, production-ready AI prompts specifically for the Vue.js department. They cover a wide range of everyday needs — code refactoring, debugging, architecture guidance, API integration, security reviews, testing, performance tuning, accessibility improvements, documentation, and app modernisation. It's been really satisfying to see colleagues get genuine value out of it."
     }
   ]
 }

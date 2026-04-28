@@ -903,7 +903,6 @@
                 { key: 'frameworks', title: 'Frameworks' },
                 { key: 'state', title: 'State Management' },
                 { key: 'ui', title: 'UI Frameworks' },
-                { key: 'backend', title: 'Backend' },
                 { key: 'tools', title: 'Tools' }
             ].filter(cat => techStack[cat.key]);
 
@@ -912,7 +911,7 @@
                     <h3>${cat.title}</h3>
                     <ul class="tech-list">
                         ${techStack[cat.key].map(tech => `
-                            <li>${tech.name} <span class="proficiency">${generateStars(tech.proficiency)}</span></li>
+                            <li>${tech.name}</li>
                         `).join('')}
                     </ul>
                 </div>
