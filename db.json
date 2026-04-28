@@ -125,7 +125,7 @@
   "articles": [
     {
       "title": "TanStack Query: The Data Fetching Solution You've Been Looking For",
-      "url": "https://medium.com/@19it197.akashbhai.chauhan/tanstack-query-the-data-fetching-solution-youve-been-looking-for"
+      "url": "https://medium.com/simform-engineering/tanstack-query-the-data-fetching-solution-youve-been-looking-for-60e6e14261e6"
     },
     {
       "title": "How I Moved My App from Nuxt 3 to Nuxt 4",
@@ -170,13 +170,6 @@
       "years": "August 2019 - May 2022",
       "cgpa": "8.64",
       "website": "https://vvpedulink.ac.in/"
-    },
-    {
-      "degree": "Diploma in Information Technology",
-      "school": "Lukhdhirji Engineering College, Morbi",
-      "years": "August 2016 - June 2019",
-      "cgpa": "8.10",
-      "website": "https://www.lecollege.ac.in/"
     }
   ],
   "certifications": [
