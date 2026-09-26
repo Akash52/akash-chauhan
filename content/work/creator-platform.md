@@ -1,41 +1,60 @@
 ---
-title: 'Creator-fan interaction platform'
-description: 'Architected the entire frontend for an AI-powered platform connecting creators with their audience — auth, payments, real-time chat, and role-based access for three personas.'
+title: 'Creator and fan subscription platform'
+description: 'Built the frontend for a subscription platform with three user roles — OAuth sign-in, Stripe subscriptions, real-time chat and role-based routing — against a backend being written in parallel.'
 tags: ['Vue 3', 'TypeScript', 'Pinia', 'Ant Design Vue', 'Stripe', 'OAuth']
-role: 'Lead Frontend Developer'
+role: 'Frontend engineer'
 duration: '4 months'
-team_size: '3 developers'
+client: 'A creator subscription startup'
+# Client not named: no written permission on file. Descriptive label instead.
+client_named: false
+permission: false
 featured: true
-order: 1
+order: 2
 ---
 
-## The challenge
+## Context
 
-A startup needed a platform where creators could monetize their content and interact directly with fans. The product had three distinct user personas — Creator, Fan, and Admin — each with different permissions, dashboards, and workflows. The backend was being built in parallel, so the frontend needed to be architected for APIs that didn't fully exist yet.
+A startup building a platform where creators sell subscriptions and talk to their audience
+directly. Three roles — creator, fan, and admin — each with a different set of permissions,
+navigation and data.
 
-The hard parts: managing authentication across Google and Apple OAuth providers, integrating Stripe for subscriptions and one-time payments, building a real-time chat system, and handling role-based access control that went deeper than just "logged in vs not."
+Client and product details are withheld here; I do not have written permission to name them.
 
-## My approach
+## The hard problem
 
-I owned the entire frontend architecture from day one. Rather than rushing into features, I spent the first week building the foundation:
+The backend was being written at the same time as the frontend. Endpoints changed shape mid-build
+and some did not exist when the screens that needed them were due.
 
-- **Composable-first architecture** — Every piece of shared logic (auth state, API calls, form validation, permissions) was extracted into Vue composables. This meant features could be built by composing existing logic rather than duplicating it.
-- **Comprehensive route guard system** — Not just "is the user logged in?" but a layered system covering authentication status, email verification, subscription validation, and role-based page access. Each guard was a composable that could be combined.
-- **API layer with XSS prevention** — All API communication went through a centralized layer that handled token refresh, request deduplication, error normalization, and input sanitization.
+On top of that, access control was not a logged-in-or-not question. A page could depend on sign-in
+status, email verification, subscription state and role at the same time, and those conditions
+changed independently of each other.
 
-## Key technical work
+## What I did
 
-**Stripe integration with subscription lifecycle management.** This wasn't just "add a payment button." I built the full subscription flow: plan selection, checkout via Stripe Elements, webhook-driven status updates, grace periods, cancellation, and re-subscription. The tricky part was keeping the frontend state in sync with Stripe's asynchronous webhook events.
+**Put the API behind one layer.** Token refresh, error normalisation and request handling lived in
+a single place, so a change in an endpoint's shape was a change in one file rather than across
+every screen calling it.
 
-**Multi-provider OAuth with token rotation.** Google and Apple OAuth with automatic token refresh, secure storage, and graceful fallback when tokens expire during a session. I built this as a provider-agnostic composable so adding new OAuth providers later would be a configuration change, not a code change.
+**Made route guards composable.** Rather than one guard checking everything, each condition —
+authenticated, verified, subscribed, correct role — was separate and combined per route. New
+routes declared what they required instead of repeating the logic.
 
-**Real-time chat system.** WebSocket-based messaging with typing indicators, read receipts, and message history pagination. The challenge was handling reconnection gracefully — users on flaky mobile connections needed to rejoin without losing messages.
+**Built the Stripe subscription flow end to end:** plan selection, Stripe Elements checkout,
+webhook-driven status changes, grace periods, cancellation and re-subscription. The awkward part is
+that Stripe confirms asynchronously, so the interface has to stay honest about state it does not
+know yet.
 
-**Role-based UI rendering.** Not just hiding buttons — entire page layouts, navigation items, and data queries changed based on the active persona. A Creator sees analytics and content management; a Fan sees discovery and subscriptions; an Admin sees moderation tools and platform metrics.
+**Added Google and Apple OAuth** behind one provider-agnostic interface, so a third provider would
+be configuration rather than new code.
 
-## Results
+**Built real-time chat** over WebSockets, with reconnection that recovers missed messages — the
+users were on mobile connections that drop.
 
-- Shipped on schedule despite the backend being built in parallel
-- Zero critical bugs in the first month after launch
-- Route guard system was reused in two subsequent projects at the company
-- Composable library reduced feature development time for the team by an estimated 30%
+## Outcome
+
+The platform shipped with all three roles working, and the frontend stayed buildable while the API
+underneath it was still moving.
+
+## Stack
+
+Vue 3, TypeScript, Pinia, Ant Design Vue, Stripe, Google and Apple OAuth, WebSockets.

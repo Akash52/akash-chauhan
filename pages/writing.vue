@@ -83,7 +83,7 @@ const updated = new Date(fetchedAt).toLocaleDateString('en-GB', {
             :href="profile.links.medium"
             target="_blank"
             rel="noopener"
-            class="text-accent-600 hover:underline"
+            class="link-inline"
           >
             All articles on Medium
           </a>

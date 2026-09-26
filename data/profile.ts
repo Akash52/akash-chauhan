@@ -108,6 +108,12 @@ export const profile = {
 
 /** Deployment target: GitHub Pages project site. */
 export const site = {
+  /**
+   * Origin only. nuxt-site-config rejects a URL containing a path, and the
+   * sitemap composes this with app.baseURL itself.
+   */
+  origin: 'https://akash52.github.io',
+  /** Where the site actually lives — used for canonical, og:url and the OG card. */
   url: 'https://akash52.github.io/akash-chauhan',
   baseURL: '/akash-chauhan/',
   title: 'Akash Chauhan — Frontend Engineer',

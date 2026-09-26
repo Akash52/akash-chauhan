@@ -39,15 +39,30 @@ export default defineNuxtConfig({
     '@nuxt/image',
     '@nuxtjs/tailwindcss',
     '@nuxtjs/google-fonts',
+    // Generates metric-matched local fallbacks, so the swap from Georgia to
+    // Source Serif 4 does not reflow the h1. That swap was the entire CLS.
+    '@nuxtjs/fontaine',
     '@nuxtjs/sitemap',
     '@nuxtjs/robots',
   ],
 
+  fontMetrics: {
+    fonts: ['Inter', 'Source Serif 4'],
+  },
+
   // Consumed by @nuxtjs/sitemap and @nuxtjs/robots. Absent before, so the
-  // sitemap was emitting URLs that pointed nowhere.
+  // sitemap was emitting URLs that pointed nowhere. Origin only — the module
+  // composes it with app.baseURL.
   site: {
-    url: site.url,
+    url: site.origin,
     name: site.title,
+  },
+
+  robots: {
+    // A project site cannot own /robots.txt: crawlers only read it at the
+    // domain root, which belongs to the akash52.github.io repo, not this one.
+    // Per-page robots meta tags still apply.
+    robotsTxt: false,
   },
 
   content: {
@@ -87,6 +102,12 @@ export default defineNuxtConfig({
 
   sitemap: {
     strictNuxtContentPaths: true,
+    // crawlLinks follows the baseURL-prefixed hrefs in the rendered HTML and
+    // registers "/akash-chauhan" as a route, producing a doubled path that
+    // resolves to no file. Exclusion matches the final URL path, so this has
+    // to name the doubled form exactly — "/akash-chauhan/**" would match the
+    // whole site and empty the sitemap.
+    exclude: ['/akash-chauhan/akash-chauhan'],
   },
 
   devtools: { enabled: process.env.NODE_ENV === 'development' },

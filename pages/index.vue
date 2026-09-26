@@ -1,116 +1,46 @@
 <script setup lang="ts">
+import { profile, site } from '~/data/profile'
+import { services } from '~/data/services'
+
 useSeo({
-  title: 'Akash Chauhan — Senior Frontend Developer',
-  description:
-    'I help product teams ship frontend faster — building new apps, rescuing legacy codebases, and migrating to modern stacks. Vue, React, Angular.',
+  title: site.title,
+  description: site.description(),
   path: '/',
 })
 
-// Featured case studies — pulled from content/work/ markdown files
+// Case studies from content/work/ markdown
 const { data: featuredWork } = await useAsyncData('featured-work', () =>
-  queryContent('work')
-    .where({ featured: true })
-    .sort({ order: 1 })
-    .limit(3)
-    .find(),
+  queryContent('work').where({ featured: true }).sort({ order: 1 }).limit(3).find(),
 )
 
-// Featured articles — from data/articles.generated.json, not hand-typed
 const { featured: featuredArticles, total: articleTotal } = useArticles()
-
-// Services data
-const services = [
-  {
-    title: 'New app build',
-    icon: 'rocket' as const,
-    description:
-      'Architecture, component library, auth, routing, state management, CI/CD — from blank repo to production-ready app.',
-    features: [
-      'Full project setup and architecture',
-      'Component library foundation',
-      'Auth, routing, and state management',
-      'CI pipeline and deployment',
-      'Handoff documentation',
-    ],
-  },
-  {
-    title: 'Codebase rescue & migration',
-    icon: 'arrows' as const,
-    description:
-      'Audit your existing frontend, plan the migration path, and execute it without breaking production or losing data.',
-    features: [
-      'Codebase audit and migration plan',
-      'Incremental migration strategy',
-      'Zero-downtime execution',
-      'Production error resolution',
-      'Team knowledge transfer',
-    ],
-  },
-  {
-    title: 'Embedded frontend developer',
-    icon: 'code' as const,
-    description:
-      'Join your team for 2–6 months. Feature development, code reviews, mentoring, and architecture decisions across any stack.',
-    features: [
-      'Ramp up in under 2 weeks',
-      'Vue, React, or Angular',
-      'Code reviews and mentoring',
-      'Architecture decisions',
-      'Structured handoff at end',
-    ],
-  },
-]
-
-// Testimonials — anonymized from real performance reviews
-const testimonials = [
-  {
-    quote:
-      'Excellent troubleshooting skills and no interference was required. This shows maturity and ownership quality that is rare at this experience level.',
-    author: 'Engineering Manager',
-    role: 'Direct Manager, 2024 Review',
-  },
-  {
-    quote:
-      'Quickly understood the domain and delivered from the first week. Hands-on ownership has elevated significantly — works independently on complex problems.',
-    author: 'Department Head',
-    role: 'Skip-level Review, 2025',
-  },
-  {
-    quote:
-      'Transitioned across three major frameworks within six months while keeping code quality consistent. Very quickly understood requirements and delivered without much guidance.',
-    author: 'Technical Lead',
-    role: 'Peer Review, 2024',
-  },
-]
+const { featured: featuredRepos, starsEarned, updatedLabel, profileUrl } = useGithub()
 </script>
 
 <template>
   <div>
-    <!-- Hero -->
     <AppHero />
 
-    <!-- Trust bar -->
-    <TrustBar />
-
-    <!-- Featured work -->
-    <section class="section-padding">
+    <!-- Case studies -->
+    <section class="section-padding border-t border-ink-100">
       <div class="container-content">
-        <div class="flex items-end justify-between">
-          <div>
-            <h2 class="text-display-sm text-ink-900">Selected work</h2>
+        <div class="flex flex-wrap items-end justify-between gap-4">
+          <div class="max-w-prose">
+            <h2 class="font-serif text-display-sm text-ink-900">Case studies</h2>
             <p class="mt-2 text-body text-ink-500">
-              Production projects I've architected, built, and shipped.
+              What the problem was, what I did about it, and what shipped.
             </p>
           </div>
           <NuxtLink
             to="/work"
-            class="hidden text-small font-medium text-accent-600 transition-colors hover:text-accent-700 md:block"
+            class="inline-flex min-h-[44px] items-center gap-1 text-small font-medium text-accent-600 transition-colors hover:text-accent-700"
           >
-            View all work →
+            All case studies
+            <span aria-hidden="true">&rarr;</span>
           </NuxtLink>
         </div>
 
-        <div class="mt-8 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+        <div class="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
           <CaseStudyCard
             v-for="project in featuredWork"
             :key="project._path"
@@ -121,102 +51,94 @@ const testimonials = [
             :role="project.role"
           />
         </div>
-
-        <div class="mt-6 text-center md:hidden">
-          <NuxtLink to="/work" class="text-small font-medium text-accent-600">
-            View all work →
-          </NuxtLink>
-        </div>
       </div>
     </section>
 
     <!-- Services -->
-    <section class="section-padding border-t border-ink-100 bg-ink-50/30">
+    <section class="section-padding border-t border-ink-100 bg-ink-50/40">
       <div class="container-content">
-        <div class="max-w-xl">
-          <h2 class="text-display-sm text-ink-900">How I can help</h2>
+        <div class="max-w-prose">
+          <h2 class="font-serif text-display-sm text-ink-900">How I can help</h2>
           <p class="mt-2 text-body text-ink-500">
-            Three ways to work together, depending on what your team needs right now.
+            Three things I am hired to do. Each one links to work you can check.
           </p>
         </div>
 
-        <div class="mt-8 grid gap-5 md:grid-cols-3">
-          <ServiceCard
-            v-for="service in services"
-            :key="service.title"
-            :title="service.title"
-            :description="service.description"
-            :icon="service.icon"
-            :features="service.features"
-          />
+        <div class="mt-10 grid gap-x-10 gap-y-8 md:grid-cols-3">
+          <div v-for="service in services" :key="service.slug">
+            <h3 class="font-serif text-heading text-ink-900">{{ service.title }}</h3>
+            <p class="mt-2 text-small text-ink-600">{{ service.forWhom }}</p>
+          </div>
         </div>
 
-        <div class="mt-8 text-center">
-          <NuxtLink
-            to="/services"
-            class="text-small font-medium text-accent-600 transition-colors hover:text-accent-700"
-          >
-            Learn more about working together →
-          </NuxtLink>
-        </div>
+        <NuxtLink
+          to="/services"
+          class="mt-6 inline-flex min-h-[44px] items-center gap-1 text-small font-medium text-accent-600 transition-colors hover:text-accent-700"
+        >
+          What each one involves
+          <span aria-hidden="true">&rarr;</span>
+        </NuxtLink>
       </div>
     </section>
 
-    <!-- Testimonials -->
+    <!-- Open source -->
     <section class="section-padding border-t border-ink-100">
       <div class="container-content">
-        <h2 class="text-display-sm text-ink-900">What people say</h2>
-        <p class="mt-2 text-body text-ink-500">
-          From performance reviews and team feedback over 4+ years.
-        </p>
-
-        <div class="mt-8 grid gap-5 md:grid-cols-3">
-          <TestimonialCard
-            v-for="testimonial in testimonials"
-            :key="testimonial.quote"
-            :quote="testimonial.quote"
-            :author="testimonial.author"
-            :role="testimonial.role"
-          />
+        <div class="max-w-prose">
+          <h2 class="font-serif text-display-sm text-ink-900">Open source</h2>
+          <p class="mt-2 text-body text-ink-500">
+            {{ starsEarned }} stars across my public repositories. Everything here is readable
+            before you hire me.
+          </p>
         </div>
+
+        <div class="mt-8 divide-y divide-ink-100 border-y border-ink-100">
+          <RepoCard v-for="repo in featuredRepos" :key="repo.name" :repo="repo" />
+        </div>
+
+        <p class="mt-6 text-caption text-ink-400">
+          Source: GitHub API, updated {{ updatedLabel }}.
+          <a
+            :href="profileUrl"
+            target="_blank"
+            rel="noopener"
+            class="link-inline"
+          >
+            {{ profile.links.github.replace('https://', '') }}
+          </a>
+        </p>
       </div>
     </section>
 
-    <!-- Latest articles -->
-    <section class="section-padding border-t border-ink-100 bg-ink-50/30">
+    <!-- Writing -->
+    <section class="section-padding border-t border-ink-100 bg-ink-50/40">
       <div class="container-content">
-        <div class="flex items-end justify-between">
-          <div>
+        <div class="flex flex-wrap items-end justify-between gap-4">
+          <div class="max-w-prose">
             <h2 class="font-serif text-display-sm text-ink-900">Writing</h2>
             <p class="mt-2 text-body text-ink-500">
-              Technical deep-dives, migration guides, and architecture patterns.
+              Migrations, architecture and the parts that went wrong.
             </p>
           </div>
           <NuxtLink
             to="/writing"
-            class="hidden text-small font-medium text-accent-600 transition-colors hover:text-accent-700 md:block"
+            class="inline-flex min-h-[44px] items-center gap-1 text-small font-medium text-accent-600 transition-colors hover:text-accent-700"
           >
-            All {{ articleTotal }} articles →
+            All {{ articleTotal }} articles
+            <span aria-hidden="true">&rarr;</span>
           </NuxtLink>
         </div>
 
-        <div class="mt-8 grid gap-5 md:grid-cols-3">
+        <div class="mt-10 grid gap-5 md:grid-cols-3">
           <ArticleCard
             v-for="article in featuredArticles"
             :key="article.slug"
             :article="article"
           />
         </div>
-
-        <div class="mt-6 text-center md:hidden">
-          <NuxtLink to="/writing" class="text-small font-medium text-accent-600">
-            All {{ articleTotal }} articles →
-          </NuxtLink>
-        </div>
       </div>
     </section>
 
-    <!-- CTA -->
     <CtaSection />
   </div>
 </template>

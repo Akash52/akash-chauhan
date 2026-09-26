@@ -43,8 +43,16 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: npm run generate
 
+      # Catches hydration blanking and 360px regressions, which reading the
+      # built HTML cannot. Uses the Chrome preinstalled on the runner rather
+      # than downloading Playwright's browsers.
+      - name: Browser checks
+        env:
+          CHROME_PATH: /usr/bin/google-chrome
+        run: npm run check:browser
+
       - name: Verify the build before publishing
-        run: node scripts/audit.mjs
+        run: npm run audit
 
       - uses: actions/configure-pages@v4
 

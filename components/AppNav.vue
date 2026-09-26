@@ -3,7 +3,7 @@ const route = useRoute()
 const isOpen = ref(false)
 
 const links = [
-  { label: 'Work', to: '/work' },
+  { label: 'Case studies', to: '/work' },
   { label: 'Services', to: '/services' },
   { label: 'Writing', to: '/writing' },
   { label: 'About', to: '/about' },
@@ -20,27 +20,30 @@ watch(() => route.path, () => {
 </script>
 
 <template>
-  <header class="sticky top-0 z-50 border-b border-ink-100 bg-ink-0/90 backdrop-blur-sm">
+  <!-- Opaque, not translucent: the blurred-glass header is one of the tells. -->
+  <header class="sticky top-0 z-50 border-b border-ink-100 bg-ink-0">
     <nav class="container-content flex h-16 items-center justify-between">
-      <!-- Logo / Name -->
-      <NuxtLink to="/" class="text-subheading text-ink-900 transition-colors hover:text-accent-600">
+      <NuxtLink
+        to="/"
+        class="flex h-11 items-center font-serif text-subheading text-ink-900 transition-colors hover:text-accent-600"
+      >
         Akash Chauhan
       </NuxtLink>
 
-      <!-- Desktop links -->
-      <div class="hidden items-center gap-8 md:flex">
+      <!-- Desktop links. h-11 keeps each target at 44px. -->
+      <div class="hidden items-center gap-6 md:flex">
         <NuxtLink
           v-for="link in links"
           :key="link.to"
           :to="link.to"
-          class="text-small transition-colors"
+          class="flex h-11 items-center px-2 text-small transition-colors"
           :class="isActive(link.to) ? 'text-accent-600 font-medium' : 'text-ink-500 hover:text-ink-900'"
         >
           {{ link.label }}
         </NuxtLink>
         <NuxtLink
           to="/contact"
-          class="rounded-lg bg-ink-900 px-4 py-2 text-small font-medium text-ink-0 transition-all hover:bg-ink-800"
+          class="flex h-11 items-center rounded-lg bg-ink-900 px-4 text-small font-medium text-ink-0 transition-colors hover:bg-ink-800"
         >
           Get in touch
         </NuxtLink>
@@ -48,8 +51,9 @@ watch(() => route.path, () => {
 
       <!-- Mobile hamburger -->
       <button
-        class="flex h-10 w-10 items-center justify-center rounded-lg text-ink-600 transition-colors hover:bg-ink-50 md:hidden"
+        class="flex h-11 w-11 items-center justify-center rounded-lg text-ink-600 transition-colors hover:bg-ink-50 md:hidden"
         aria-label="Toggle menu"
+        :aria-expanded="isOpen"
         @click="isOpen = !isOpen"
       >
         <svg v-if="!isOpen" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
@@ -76,14 +80,14 @@ watch(() => route.path, () => {
             v-for="link in links"
             :key="link.to"
             :to="link.to"
-            class="rounded-lg px-3 py-2.5 text-body transition-colors"
+            class="flex min-h-[44px] items-center rounded-lg px-3 text-body transition-colors"
             :class="isActive(link.to) ? 'bg-accent-50 text-accent-600 font-medium' : 'text-ink-600 hover:bg-ink-50'"
           >
             {{ link.label }}
           </NuxtLink>
           <NuxtLink
             to="/contact"
-            class="mt-2 rounded-lg bg-ink-900 px-3 py-2.5 text-center text-body font-medium text-ink-0"
+            class="mt-2 flex min-h-[44px] items-center justify-center rounded-lg bg-ink-900 px-3 text-body font-medium text-ink-0"
           >
             Get in touch
           </NuxtLink>

@@ -1,8 +1,8 @@
 <script setup lang="ts">
 useSeo({
-  title: 'Work — Akash Chauhan',
+  title: 'Case studies — Akash Chauhan',
   description:
-    'Production projects I\'ve architected and shipped — from creator platforms to enterprise dashboards to legacy migrations.',
+    'Frontend work on a Nuxt 2 to 3 migration, a subscription platform, a legacy senior-care application and an Angular analytics dashboard.',
   path: '/work',
 })
 
@@ -15,15 +15,15 @@ const { data: projects } = await useAsyncData('all-work', () =>
   <div>
     <section class="section-padding">
       <div class="container-content">
-        <div class="max-w-xl">
-          <h1 class="text-display text-ink-950">Selected work</h1>
-          <p class="mt-4 text-lg text-ink-500">
-            Each project below is a real production application I architected and shipped.
-            Details are anonymized where required by NDA, but the technical depth is real.
+        <div class="max-w-prose">
+          <h1 class="font-serif text-display text-ink-950">Case studies</h1>
+          <p class="mt-4 text-lg text-ink-600">
+            What the problem was, what I did about it, and what shipped. Where I do not have
+            permission to name a client, the work is described and the client is not.
           </p>
         </div>
 
-        <div class="mt-10 grid gap-6 md:grid-cols-2">
+        <div class="mt-12 grid gap-5 md:grid-cols-2">
           <CaseStudyCard
             v-for="project in projects"
             :key="project._path"
@@ -32,14 +32,12 @@ const { data: projects } = await useAsyncData('all-work', () =>
             :slug="project._path?.replace('/work/', '') || ''"
             :tags="project.tags"
             :role="project.role"
+            :client="project.client"
           />
         </div>
       </div>
     </section>
 
-    <CtaSection
-      title="Want to see more?"
-      description="I'm happy to walk through any of these projects in detail on a call. Let's talk about what you're building."
-    />
+    <CtaSection />
   </div>
 </template>

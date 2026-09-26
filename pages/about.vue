@@ -1,118 +1,115 @@
 <script setup lang="ts">
+import { profile, experienceLabel } from '~/data/profile'
+
+const { total: articleTotal, simformCount } = useArticles()
+
 useSeo({
   title: 'About — Akash Chauhan',
-  description:
-    'Senior frontend developer with 4+ years shipping production apps across Vue, React, and Angular. Based in Ahmedabad, India.',
+  description: `Frontend engineer with ${experienceLabel()} at Simform Solutions, working across Vue, React and Angular. Based in ${profile.location}.`,
   path: '/about',
 })
 
-const techStack = [
+/**
+ * Grouped by where the work happened rather than rated out of five. A bar
+ * claiming "Vue 90%" measures nothing a client can check; the case study it
+ * links to does.
+ */
+const toolsByContext = [
   {
-    category: 'Core',
-    items: ['JavaScript (ES6+)', 'TypeScript', 'HTML5', 'CSS3'],
+    context: 'Vue and Nuxt',
+    where: { label: 'Baserow case study', to: '/work/baserow' },
+    tools: ['Vue 3', 'Nuxt 3', 'Pinia', 'Vuex', 'TypeScript', 'Vite'],
   },
   {
-    category: 'Frameworks',
-    items: ['Vue 3', 'Nuxt 3', 'React', 'Angular'],
+    context: 'Angular',
+    where: { label: 'Analytics dashboard case study', to: '/work/analytics-dashboard' },
+    tools: ['Angular', 'RxJS', 'NgRx', 'NG-Zorro', 'SignalR', 'Apache ECharts'],
   },
   {
-    category: 'State & data',
-    items: ['Pinia', 'TanStack Query', 'Redux Toolkit', 'NgRx', 'RxJS', 'Vuex'],
+    context: 'React',
+    where: null,
+    tools: ['React', 'TanStack Query', 'Redux Toolkit'],
   },
   {
-    category: 'UI & styling',
-    items: ['Tailwind CSS', 'Ant Design Vue', 'Vuetify', 'NG-Zorro', 'Material-UI'],
+    context: 'Styling and UI',
+    where: null,
+    tools: ['Tailwind CSS', 'Ant Design Vue', 'Vuetify', 'Material-UI'],
   },
   {
-    category: 'Backend & APIs',
-    items: ['Node.js', 'Express', 'REST APIs', 'GraphQL', 'SignalR', 'MongoDB', 'MySQL'],
+    context: 'Backend and data',
+    where: null,
+    tools: ['Node.js', 'Express', 'REST', 'GraphQL', 'MongoDB', 'MySQL'],
   },
   {
-    category: 'Tooling',
-    items: ['Git', 'Vite', 'Turborepo', 'Jest', 'Vue Test Utils', 'PWA'],
-  },
-]
-
-const testimonials = [
-  {
-    quote:
-      'Excellent troubleshooting skills and no interference was required. This shows maturity and ownership quality that is rare at this experience level.',
-    author: 'Engineering Manager',
-    role: 'Direct Manager, 2024 Review',
-  },
-  {
-    quote:
-      'Quickly understood the domain and delivered from the first week. Hands-on ownership has elevated significantly — works independently on complex problems.',
-    author: 'Department Head',
-    role: 'Skip-level Review, 2025',
+    context: 'Testing and tooling',
+    where: null,
+    tools: ['Jest', 'Vue Test Utils', 'Turborepo', 'Git', 'PWA'],
   },
 ]
 </script>
 
 <template>
   <div>
-    <!-- Story -->
     <section class="section-padding">
       <div class="container-content">
         <div class="grid gap-12 md:grid-cols-5">
           <div class="md:col-span-3">
-            <h1 class="text-display text-ink-950">About me</h1>
+            <h1 class="font-serif text-display text-ink-950">About</h1>
 
             <div class="mt-6 space-y-4 text-body leading-relaxed text-ink-600">
               <p>
-                I'm a senior frontend developer based in Ahmedabad, India. For the past 4+ years I've been building production software at
-                <strong class="text-ink-800">Simform Solutions</strong> — shipping 6 applications
-                across Vue, React, and Angular, mentoring junior engineers, and writing technical
-                content that's been adopted across the engineering department.
+                I am a frontend engineer in {{ profile.location }}. For the past
+                {{ experienceLabel() }} I have been at
+                <strong class="font-medium text-ink-900">{{ profile.company }}</strong>, working
+                across Vue, React and Angular on
+                {{ profile.productionProjects }} production applications.
               </p>
               <p>
-                I started coding during my diploma, built 30+ JavaScript projects on GitHub before
-                landing my first job, and haven't stopped since. I'm the kind of developer who
-                traces a race condition to its root cause instead of patching the symptom, writes
-                handover documentation that the next team actually uses, and picks up a new framework
-                in two weeks because I understand the patterns underneath.
+                Most of that work has been in codebases I did not write. I have joined projects
+                mid-flight, read my way into unfamiliar architectures, and shipped inside someone
+                else's conventions. The part I am best at is finding the actual cause of a bug
+                rather than the place it surfaces.
               </p>
               <p>
-                Now I'm transitioning to freelance because I want to pick the problems I solve.
-                I'm especially drawn to codebase migrations, greenfield architecture, and teams that
-                need a senior developer who can ship independently from day one.
+                I am taking on freelance work now because I would rather choose the problems. The
+                ones I want are migrations, and older codebases that people have stopped wanting to
+                open.
               </p>
               <p>
-                When I'm not coding, I write technical articles — on everything from design patterns
-                to production migration guides — and maintain an open-source AI prompt library
-                that's used by developers across my department.
+                I also write — {{ articleTotal }} articles so far, {{ simformCount }} of them in
+                Simform Engineering. Writing something up is how I find out whether I actually
+                understood it.
               </p>
             </div>
           </div>
 
-          <!-- Quick facts sidebar -->
           <div class="md:col-span-2">
             <div class="rounded-card border border-ink-100 bg-ink-50/50 p-6">
               <h2 class="text-subheading text-ink-900">Quick facts</h2>
               <dl class="mt-4 space-y-3">
                 <div>
-                  <dt class="text-caption font-medium text-ink-400">Location</dt>
-                  <dd class="text-small text-ink-700">Ahmedabad, Gujarat, India</dd>
+                  <dt class="text-caption font-medium text-ink-400">Based in</dt>
+                  <dd class="text-small text-ink-700">{{ profile.location }}</dd>
                 </div>
                 <div>
                   <dt class="text-caption font-medium text-ink-400">Timezone</dt>
-                  <dd class="text-small text-ink-700">IST (UTC+5:30)</dd>
+                  <dd class="text-small text-ink-700">{{ profile.timezone }}</dd>
                 </div>
                 <div>
                   <dt class="text-caption font-medium text-ink-400">Experience</dt>
-                  <dd class="text-small text-ink-700">4+ years in production</dd>
+                  <dd class="text-small text-ink-700">
+                    {{ experienceLabel() }}, since {{ profile.traineeFrom }}
+                  </dd>
                 </div>
                 <div>
-                  <dt class="text-caption font-medium text-ink-400">Education</dt>
-                  <dd class="text-small text-ink-700">B.E. Information Technology (CGPA 8.64)</dd>
+                  <dt class="text-caption font-medium text-ink-400">Current role</dt>
+                  <dd class="text-small text-ink-700">
+                    {{ profile.role }}, {{ profile.company }}
+                  </dd>
                 </div>
                 <div>
                   <dt class="text-caption font-medium text-ink-400">Languages</dt>
                   <dd class="text-small text-ink-700">English, Hindi, Gujarati</dd>
-                </div>
-                <div>
-                  <dt class="text-caption font-medium text-ink-400">Availability</dt>
-                  <dd class="text-small font-medium text-signal-600">Open for projects</dd>
                 </div>
               </dl>
             </div>
@@ -121,22 +118,30 @@ const testimonials = [
       </div>
     </section>
 
-    <!-- Tech stack -->
-    <section class="section-padding border-t border-ink-100 bg-ink-50/30">
+    <!-- Tools -->
+    <section class="section-padding border-t border-ink-100 bg-ink-50/40">
       <div class="container-content">
-        <h2 class="text-display-sm text-ink-900">Tech stack</h2>
-        <p class="mt-2 text-body text-ink-500">
-          Technologies I've used in production — not just tutorials.
+        <h2 class="font-serif text-display-sm text-ink-900">
+          Tools I have shipped production code with
+        </h2>
+        <p class="mt-2 max-w-prose text-body text-ink-500">
+          Grouped by where I used them, not rated out of five.
         </p>
 
-        <div class="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          <div v-for="group in techStack" :key="group.category">
-            <h3 class="text-caption font-medium uppercase tracking-wider text-ink-400">
-              {{ group.category }}
-            </h3>
+        <div class="mt-10 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+          <div v-for="group in toolsByContext" :key="group.context">
+            <h3 class="text-subheading text-ink-900">{{ group.context }}</h3>
+            <NuxtLink
+              v-if="group.where"
+              :to="group.where.to"
+              class="inline-flex min-h-[44px] items-center gap-1 text-caption text-accent-600 hover:underline"
+            >
+              {{ group.where.label }}
+              <span aria-hidden="true">&rarr;</span>
+            </NuxtLink>
             <div class="mt-3 flex flex-wrap gap-2">
-              <span v-for="item in group.items" :key="item" class="tag tag-default">
-                {{ item }}
+              <span v-for="tool in group.tools" :key="tool" class="tag tag-default">
+                {{ tool }}
               </span>
             </div>
           </div>
@@ -144,19 +149,36 @@ const testimonials = [
       </div>
     </section>
 
-    <!-- Testimonials -->
+    <!-- Mentoring -->
     <section class="section-padding border-t border-ink-100">
-      <div class="container-content">
-        <h2 class="text-display-sm text-ink-900">What colleagues say</h2>
-        <div class="mt-8 grid gap-5 md:grid-cols-2">
-          <TestimonialCard
-            v-for="t in testimonials"
-            :key="t.quote"
-            :quote="t.quote"
-            :author="t.author"
-            :role="t.role"
-          />
+      <div class="container-content max-w-prose">
+        <h2 class="font-serif text-display-sm text-ink-900">Sharing what I learn</h2>
+        <div class="mt-4 space-y-3 text-body text-ink-600">
+          <p>
+            I ran a SignalR training session for my department after building a real-time
+            notification layer with it, because the next team to touch it should not have to work it
+            out from scratch.
+          </p>
+          <p>
+            I also maintain an internal prompt library used by the Vue.js team at
+            {{ profile.company }}.
+          </p>
         </div>
+
+        <!-- Compact, at the bottom, where it belongs. -->
+        <h3 class="mt-10 text-caption font-medium uppercase tracking-wider text-ink-400">
+          Education
+        </h3>
+        <ul class="mt-3 space-y-1.5">
+          <li
+            v-for="entry in profile.education"
+            :key="entry.qualification"
+            class="text-small text-ink-500"
+          >
+            {{ entry.qualification }}, {{ entry.institution }}, {{ entry.location }}
+            ({{ entry.from }}–{{ entry.to }}, CGPA {{ entry.cgpa }})
+          </li>
+        </ul>
       </div>
     </section>
 
