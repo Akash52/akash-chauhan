@@ -5,7 +5,7 @@ const isOpen = ref(false)
 const links = [
   { label: 'Work', to: '/work' },
   { label: 'Services', to: '/services' },
-  { label: 'Blog', to: '/blog' },
+  { label: 'Writing', to: '/writing' },
   { label: 'About', to: '/about' },
 ]
 
@@ -20,7 +20,7 @@ watch(() => route.path, () => {
 </script>
 
 <template>
-  <header class="sticky top-0 z-50 border-b border-ink-100 bg-white/90 backdrop-blur-sm">
+  <header class="sticky top-0 z-50 border-b border-ink-100 bg-ink-0/90 backdrop-blur-sm">
     <nav class="container-content flex h-16 items-center justify-between">
       <!-- Logo / Name -->
       <NuxtLink to="/" class="text-subheading text-ink-900 transition-colors hover:text-accent-600">
@@ -40,7 +40,7 @@ watch(() => route.path, () => {
         </NuxtLink>
         <NuxtLink
           to="/contact"
-          class="rounded-lg bg-ink-900 px-4 py-2 text-small font-medium text-white transition-all hover:bg-ink-800"
+          class="rounded-lg bg-ink-900 px-4 py-2 text-small font-medium text-ink-0 transition-all hover:bg-ink-800"
         >
           Get in touch
         </NuxtLink>
@@ -70,7 +70,7 @@ watch(() => route.path, () => {
       leave-from-class="opacity-100 translate-y-0"
       leave-to-class="opacity-0 -translate-y-2"
     >
-      <div v-if="isOpen" class="border-t border-ink-100 bg-white px-6 pb-6 pt-4 md:hidden">
+      <div v-if="isOpen" class="border-t border-ink-100 bg-ink-0 px-6 pb-6 pt-4 md:hidden">
         <div class="flex flex-col gap-1">
           <NuxtLink
             v-for="link in links"
@@ -83,7 +83,7 @@ watch(() => route.path, () => {
           </NuxtLink>
           <NuxtLink
             to="/contact"
-            class="mt-2 rounded-lg bg-ink-900 px-3 py-2.5 text-center text-body font-medium text-white"
+            class="mt-2 rounded-lg bg-ink-900 px-3 py-2.5 text-center text-body font-medium text-ink-0"
           >
             Get in touch
           </NuxtLink>

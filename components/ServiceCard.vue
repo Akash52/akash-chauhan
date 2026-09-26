@@ -16,7 +16,7 @@ const iconPaths: Record<string, string> = {
 </script>
 
 <template>
-  <div class="flex flex-col rounded-card border border-ink-100 bg-white p-6 shadow-card">
+  <div class="flex flex-col rounded-card border border-ink-100 bg-ink-0 p-6 shadow-card">
     <!-- Icon -->
     <div class="mb-4 flex h-10 w-10 items-center justify-center rounded-lg bg-accent-50">
       <svg class="h-5 w-5 text-accent-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
@@ -34,7 +34,7 @@ const iconPaths: Record<string, string> = {
         :key="feature"
         class="flex items-start gap-2 text-small text-ink-600"
       >
-        <svg class="mt-0.5 h-4 w-4 flex-shrink-0 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <svg class="mt-0.5 h-4 w-4 flex-shrink-0 text-accent-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
           <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
         </svg>
         {{ feature }}

@@ -48,7 +48,7 @@ async function handleSubmit() {
             </p>
 
             <!-- Success state -->
-            <div v-if="isSubmitted" class="mt-8 rounded-card border border-emerald-100 bg-emerald-50 p-8 text-center">
+            <div v-if="isSubmitted" class="mt-8 rounded-card border border-signal-100 bg-signal-50 p-8 text-center">
               <div class="text-3xl">✓</div>
               <h2 class="mt-3 text-heading text-ink-900">Message sent</h2>
               <p class="mt-2 text-body text-ink-500">
@@ -65,7 +65,7 @@ async function handleSubmit() {
                   v-model="form.name"
                   type="text"
                   required
-                  class="w-full rounded-lg border border-ink-200 bg-white px-4 py-2.5 text-body text-ink-900 outline-none transition-colors placeholder:text-ink-300 focus:border-accent-400 focus:ring-2 focus:ring-accent-100"
+                  class="w-full rounded-lg border border-ink-200 bg-ink-0 px-4 py-2.5 text-body text-ink-900 outline-none transition-colors placeholder:text-ink-300 focus:border-accent-400 focus:ring-2 focus:ring-accent-100"
                   placeholder="Your name"
                 />
               </div>
@@ -77,7 +77,7 @@ async function handleSubmit() {
                   v-model="form.email"
                   type="email"
                   required
-                  class="w-full rounded-lg border border-ink-200 bg-white px-4 py-2.5 text-body text-ink-900 outline-none transition-colors placeholder:text-ink-300 focus:border-accent-400 focus:ring-2 focus:ring-accent-100"
+                  class="w-full rounded-lg border border-ink-200 bg-ink-0 px-4 py-2.5 text-body text-ink-900 outline-none transition-colors placeholder:text-ink-300 focus:border-accent-400 focus:ring-2 focus:ring-accent-100"
                   placeholder="you@company.com"
                 />
               </div>
@@ -87,7 +87,7 @@ async function handleSubmit() {
                 <select
                   id="project-type"
                   v-model="form.projectType"
-                  class="w-full rounded-lg border border-ink-200 bg-white px-4 py-2.5 text-body text-ink-900 outline-none transition-colors focus:border-accent-400 focus:ring-2 focus:ring-accent-100"
+                  class="w-full rounded-lg border border-ink-200 bg-ink-0 px-4 py-2.5 text-body text-ink-900 outline-none transition-colors focus:border-accent-400 focus:ring-2 focus:ring-accent-100"
                 >
                   <option value="" disabled>Select a service</option>
                   <option value="new-build">New app build</option>
@@ -104,14 +104,14 @@ async function handleSubmit() {
                   v-model="form.message"
                   rows="5"
                   required
-                  class="w-full resize-y rounded-lg border border-ink-200 bg-white px-4 py-2.5 text-body text-ink-900 outline-none transition-colors placeholder:text-ink-300 focus:border-accent-400 focus:ring-2 focus:ring-accent-100"
+                  class="w-full resize-y rounded-lg border border-ink-200 bg-ink-0 px-4 py-2.5 text-body text-ink-900 outline-none transition-colors placeholder:text-ink-300 focus:border-accent-400 focus:ring-2 focus:ring-accent-100"
                   placeholder="What are you building? What's the timeline? Any tech stack preferences?"
                 />
               </div>
 
               <button
                 :disabled="isSubmitting"
-                class="rounded-lg bg-ink-900 px-6 py-3 text-body font-medium text-white transition-all hover:bg-ink-800 disabled:opacity-50"
+                class="rounded-lg bg-ink-900 px-6 py-3 text-body font-medium text-ink-0 transition-all hover:bg-ink-800 disabled:opacity-50"
                 @click="handleSubmit"
               >
                 {{ isSubmitting ? 'Sending...' : 'Send message' }}
@@ -146,10 +146,10 @@ async function handleSubmit() {
               </div>
             </div>
 
-            <div class="mt-5 rounded-card border border-emerald-100 bg-emerald-50 p-6">
+            <div class="mt-5 rounded-card border border-signal-100 bg-signal-50 p-6">
               <div class="flex items-center gap-2">
-                <span class="h-2.5 w-2.5 rounded-full bg-emerald-600" aria-hidden="true" />
-                <span class="text-small font-medium text-emerald-600">Currently available</span>
+                <span class="h-2.5 w-2.5 rounded-full bg-signal-600" aria-hidden="true" />
+                <span class="text-small font-medium text-signal-600">Currently available</span>
               </div>
               <p class="mt-2 text-small text-ink-500">
                 Taking on new projects starting September 2026. Typical response time: under 24 hours.

@@ -112,7 +112,7 @@ const testimonials = [
                 </div>
                 <div>
                   <dt class="text-caption font-medium text-ink-400">Availability</dt>
-                  <dd class="text-small font-medium text-emerald-600">Open for projects</dd>
+                  <dd class="text-small font-medium text-signal-600">Open for projects</dd>
                 </div>
               </dl>
             </div>

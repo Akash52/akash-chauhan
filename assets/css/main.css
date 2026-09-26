@@ -2,9 +2,80 @@
 @tailwind components;
 @tailwind utilities;
 
+/**
+ * Palette as CSS custom properties (RGB triplets, so Tailwind can still apply
+ * opacity modifiers like bg-ink-50/30).
+ *
+ * The ink ramp INVERTS in dark mode: ink-950 is the darkest colour on light
+ * backgrounds and the lightest on dark ones. That keeps every existing utility
+ * semantically correct — text-ink-900 is "strong text" in both themes, and
+ * bg-ink-50 is "subtly raised surface" in both — with no dark: variants to
+ * maintain across components.
+ */
 @layer base {
+  :root {
+    color-scheme: light;
+
+    /* Warm neutral, not cold grey */
+    --ink-0: 255 255 255;
+    --ink-50: 245 244 240;
+    --ink-100: 232 230 223;
+    --ink-200: 208 206 198;
+    --ink-300: 169 167 159;
+    --ink-400: 138 136 128;
+    --ink-500: 107 106 99;
+    --ink-600: 82 81 75;
+    --ink-700: 61 61 56;
+    --ink-800: 44 44 40;
+    --ink-900: 26 26 24;
+    --ink-950: 15 15 14;
+
+    /* Clay. Replaces the indigo that reads as a template default. */
+    --accent-50: 253 245 241;
+    --accent-100: 249 227 217;
+    --accent-400: 212 113 63;
+    --accent-500: 194 90 42;
+    --accent-600: 168 72 31; /* 6.6:1 on white — AA for body text */
+    --accent-700: 138 56 24;
+
+    /* Availability indicator only. Not a second brand colour. */
+    --signal-50: 236 253 245;
+    --signal-100: 209 250 229;
+    --signal-600: 4 108 78; /* 4.9:1 on white */
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      color-scheme: dark;
+
+      --ink-0: 18 18 16;
+      --ink-50: 28 28 25;
+      --ink-100: 42 42 38;
+      --ink-200: 58 58 53;
+      --ink-300: 85 84 78;
+      --ink-400: 119 117 109;
+      --ink-500: 151 149 140;
+      --ink-600: 179 177 168;
+      --ink-700: 203 201 192;
+      --ink-800: 222 220 212;
+      --ink-900: 239 238 232;
+      --ink-950: 247 246 242;
+
+      --accent-50: 42 23 16;
+      --accent-100: 61 33 23;
+      --accent-400: 200 106 60;
+      --accent-500: 216 130 84;
+      --accent-600: 232 158 112; /* 7.9:1 on --ink-0 */
+      --accent-700: 243 186 148;
+
+      --signal-50: 22 40 33;
+      --signal-100: 30 58 47;
+      --signal-600: 110 214 168;
+    }
+  }
+
   body {
-    @apply bg-white text-ink-900 antialiased;
+    @apply bg-ink-0 text-ink-900 antialiased;
     font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
   }
 
@@ -12,13 +83,27 @@
     @apply bg-accent-100 text-accent-700;
   }
 
-  /* Smooth scroll, but respect reduced motion */
   html {
     scroll-behavior: smooth;
   }
+
+  /* Keyboard focus must stay visible everywhere. */
+  :focus-visible {
+    @apply outline-none ring-2 ring-accent-500 ring-offset-2;
+    --tw-ring-offset-color: rgb(var(--ink-0));
+  }
+
   @media (prefers-reduced-motion: reduce) {
     html {
       scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
     }
   }
 }
@@ -42,7 +127,6 @@
     @apply mx-auto max-w-prose;
   }
 
-  /* Tag/pill component */
   .tag {
     @apply inline-flex items-center rounded-full px-3 py-1 text-caption font-medium;
   }
@@ -53,16 +137,5 @@
 
   .tag-accent {
     @apply bg-accent-50 text-accent-600;
-  }
-
-  /* Focus ring */
-  .focus-ring {
-    @apply outline-none ring-2 ring-accent-400 ring-offset-2 ring-offset-white;
-  }
-}
-
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
   }
 }

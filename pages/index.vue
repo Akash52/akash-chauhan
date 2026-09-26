@@ -15,13 +15,8 @@ const { data: featuredWork } = await useAsyncData('featured-work', () =>
     .find(),
 )
 
-// Latest blog posts
-const { data: latestPosts } = await useAsyncData('latest-posts', () =>
-  queryContent('blog')
-    .sort({ date: -1 })
-    .limit(3)
-    .find(),
-)
+// Featured articles — from data/articles.generated.json, not hand-typed
+const { featured: featuredArticles, total: articleTotal } = useArticles()
 
 // Services data
 const services = [
@@ -192,35 +187,30 @@ const testimonials = [
       <div class="container-content">
         <div class="flex items-end justify-between">
           <div>
-            <h2 class="text-display-sm text-ink-900">Latest articles</h2>
+            <h2 class="font-serif text-display-sm text-ink-900">Writing</h2>
             <p class="mt-2 text-body text-ink-500">
               Technical deep-dives, migration guides, and architecture patterns.
             </p>
           </div>
           <NuxtLink
-            to="/blog"
+            to="/writing"
             class="hidden text-small font-medium text-accent-600 transition-colors hover:text-accent-700 md:block"
           >
-            Read the blog →
+            All {{ articleTotal }} articles →
           </NuxtLink>
         </div>
 
         <div class="mt-8 grid gap-5 md:grid-cols-3">
-          <BlogCard
-            v-for="post in latestPosts"
-            :key="post._path"
-            :title="post.title"
-            :description="post.description"
-            :slug="post._path?.replace('/blog/', '') || ''"
-            :date="post.date"
-            :tags="post.tags"
-            :reading-time="post.readingTime"
+          <ArticleCard
+            v-for="article in featuredArticles"
+            :key="article.slug"
+            :article="article"
           />
         </div>
 
         <div class="mt-6 text-center md:hidden">
-          <NuxtLink to="/blog" class="text-small font-medium text-accent-600">
-            Read the blog →
+          <NuxtLink to="/writing" class="text-small font-medium text-accent-600">
+            All {{ articleTotal }} articles →
           </NuxtLink>
         </div>
       </div>

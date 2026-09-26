@@ -1,0 +1,130 @@
+{
+  "_comment": "Canonical article list — the source of truth. The Medium RSS feed only returns the latest ~10 posts, so this file stays complete and the build script enriches it (cover image, verified date) rather than replacing it. Summaries are written by hand from each article's actual content, not paraphrased from its title; null means not yet written and nothing renders.",
+  "_verifiedOn": "2026-09-26",
+  "articles": [
+    {
+      "slug": "angular-micro-frontend-shell",
+      "title": "I Converted a Production Angular App to a Micro-Frontend Shell — Here's Every Wall I Hit",
+      "publication": "Personal",
+      "date": "2026-09-04",
+      "url": "https://medium.com/@19it197.akashbhai.chauhan/i-converted-a-production-angular-app-to-a-micro-frontend-shell-heres-every-wall-i-hit-4cb849e2383d",
+      "summary": null,
+      "coverImage": null,
+      "featured": false,
+      "_note": "Found in the live feed on 2026-09-26; published after the curated list was compiled. Brings the total to 12, not 11."
+    },
+    {
+      "slug": "design-patterns-part-2",
+      "title": "Design Patterns Won't Save You If You Don't Know When to Use Them (Part 2 of 2)",
+      "publication": "Simform Engineering",
+      "date": "2026-06-23",
+      "url": "https://medium.com/simform-engineering/design-patterns-wont-save-you-if-you-don-t-know-when-to-use-them-part-2-of-2-2ab4ef59f3a7",
+      "summary": null,
+      "coverImage": null,
+      "featured": true
+    },
+    {
+      "slug": "design-patterns-part-1",
+      "title": "Design Patterns Won't Save You If You Don't Know When to Use Them (Part 1 of 2)",
+      "publication": "Simform Engineering",
+      "date": "2026-06-23",
+      "url": "https://medium.com/simform-engineering/design-patterns-wont-save-you-if-you-don-t-know-when-to-use-them-part-1-of-2-97f70afba43e",
+      "summary": null,
+      "coverImage": null,
+      "featured": false
+    },
+    {
+      "slug": "claude-workflow-for-your-team",
+      "title": "How to Build a Claude Workflow That Actually Works for Your Team",
+      "publication": "Personal",
+      "date": "2026-06-04",
+      "url": "https://medium.com/@19it197.akashbhai.chauhan/how-to-build-a-claude-workflow-that-actually-works-for-your-team-91c74efb52fd",
+      "summary": null,
+      "coverImage": null,
+      "featured": false
+    },
+    {
+      "slug": "system-design-news-feed",
+      "title": "System Design in Action: Building a Production-Ready News Feed",
+      "publication": "Simform Engineering",
+      "date": "2026-02-19",
+      "url": "https://medium.com/simform-engineering/system-design-in-action-building-a-production-ready-news-feed-7a334c20fee7",
+      "summary": null,
+      "coverImage": null,
+      "featured": true
+    },
+    {
+      "slug": "real-world-monorepo-guide",
+      "title": "The Real-World Monorepo Guide: What They Don't Tell You",
+      "publication": "Simform Engineering",
+      "date": "2026-01-08",
+      "url": "https://medium.com/simform-engineering/the-real-world-monorepo-guide-what-they-dont-tell-you-b03e68ffe579",
+      "summary": null,
+      "coverImage": null,
+      "featured": false
+    },
+    {
+      "slug": "axios-features-production",
+      "title": "8 Essential Axios Features for Production-Ready Apps",
+      "publication": "Personal",
+      "date": "2025-12-12",
+      "url": "https://medium.com/@19it197.akashbhai.chauhan/8-essential-axios-features-for-production-ready-apps-713d68f4edfd",
+      "summary": null,
+      "coverImage": null,
+      "featured": false
+    },
+    {
+      "slug": "tanstack-query",
+      "title": "TanStack Query: The Data Fetching Solution You've Been Looking For",
+      "publication": "Simform Engineering",
+      "date": "2025-11-11",
+      "url": "https://medium.com/simform-engineering/tanstack-query-the-data-fetching-solution-youve-been-looking-for-60e6e14261e6",
+      "summary": null,
+      "coverImage": null,
+      "featured": false
+    },
+    {
+      "slug": "pixels-to-patterns-design-systems",
+      "title": "From Pixels to Patterns: A Hands-On Guide to Design Systems",
+      "publication": "Personal",
+      "date": "2025-11-07",
+      "url": "https://medium.com/@19it197.akashbhai.chauhan/from-pixels-to-patterns-a-hands-on-guide-to-design-systems-c9001c050450",
+      "summary": null,
+      "coverImage": null,
+      "featured": false
+    },
+    {
+      "slug": "nuxt-3-to-nuxt-4-migration",
+      "title": "How I Successfully Migrated My Production App from Nuxt 3 to Nuxt 4",
+      "publication": "Simform Engineering",
+      "date": "2025-09-29",
+      "url": "https://medium.com/simform-engineering/how-i-successfully-migrated-my-production-app-from-nuxt-3-to-nuxt-4-0b7379d0743d",
+      "summary": null,
+      "coverImage": null,
+      "featured": true,
+      "_note": "This is a Nuxt 3 → 4 migration of a different application. It is NOT evidence for the Baserow case study, which was Nuxt 2 → 3. Link as related reading only."
+    },
+    {
+      "slug": "decoding-solid-principles",
+      "title": "Decoding SOLID Principles: Practical Insights with Real-World Scenarios",
+      "publication": "Simform Engineering",
+      "date": "2024-04-17",
+      "url": "https://medium.com/simform-engineering/decoding-solid-principles-practical-insights-with-real-world-scenarios-ed8af65421b5",
+      "summary": null,
+      "coverImage": null,
+      "featured": false
+    },
+    {
+      "slug": "pwas-six-frontend-frameworks",
+      "title": "Building Awesome PWAs Using Six Leading Frontend Frameworks",
+      "publication": "Simform Engineering",
+      "date": null,
+      "approxDate": "2023",
+      "url": "https://medium.com/simform-engineering/building-awesome-pwas-using-six-leading-frontend-frameworks-61bb7c280c4f",
+      "summary": null,
+      "coverImage": null,
+      "featured": false,
+      "_note": "Exact publication date unconfirmed. Renders as \"2023\" until verified; sorts last."
+    }
+  ]
+}

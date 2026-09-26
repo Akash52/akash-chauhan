@@ -1,0 +1,63 @@
+name: Build and deploy
+
+on:
+  push:
+    branches: [main]
+  # Weekly rebuild so the GitHub stats and Medium article list stay current
+  # without a commit. Monday 06:00 UTC.
+  schedule:
+    - cron: '0 6 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Let a running deploy finish rather than cancelling it half-published.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      # --legacy-peer-deps is required: npm 10.x crashes with
+      # "Cannot read properties of null (reading 'edgesOut')" while resolving
+      # Nuxt's peer graph, and the lockfile was built with this flag.
+      - name: Install
+        run: npm ci --legacy-peer-deps
+
+      - name: Build
+        env:
+          # Lifts the GitHub API from 60 to 5000 requests/hour. Automatically
+          # provided; no secret to configure.
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: npm run generate
+
+      - name: Verify the build before publishing
+        run: node scripts/audit.mjs
+
+      - uses: actions/configure-pages@v4
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: .output/public
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

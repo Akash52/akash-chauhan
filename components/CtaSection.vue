@@ -14,7 +14,7 @@ withDefaults(defineProps<Props>(), {
 <template>
   <section class="section-padding bg-ink-950">
     <div class="container-content text-center">
-      <h2 class="text-display-sm text-balance text-white">
+      <h2 class="text-display-sm text-balance text-ink-0">
         {{ title }}
       </h2>
       <p class="mx-auto mt-4 max-w-xl text-lg leading-relaxed text-ink-400">
@@ -23,13 +23,13 @@ withDefaults(defineProps<Props>(), {
       <div class="mt-8 flex flex-wrap justify-center gap-3">
         <NuxtLink
           to="/contact"
-          class="rounded-lg bg-white px-6 py-3 text-body font-medium text-ink-900 transition-all hover:bg-ink-100"
+          class="rounded-lg bg-ink-0 px-6 py-3 text-body font-medium text-ink-900 transition-all hover:bg-ink-100"
         >
           Start a conversation
         </NuxtLink>
         <NuxtLink
           to="/services"
-          class="rounded-lg border border-ink-700 px-6 py-3 text-body font-medium text-ink-300 transition-all hover:border-ink-500 hover:text-white"
+          class="rounded-lg border border-ink-700 px-6 py-3 text-body font-medium text-ink-300 transition-all hover:border-ink-500 hover:text-ink-0"
         >
           View services
         </NuxtLink>

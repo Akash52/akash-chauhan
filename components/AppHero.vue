@@ -18,9 +18,9 @@ withDefaults(defineProps<Props>(), {
     <div class="container-content">
       <div class="max-w-3xl">
         <!-- Availability badge -->
-        <div class="mb-6 inline-flex items-center gap-2 rounded-full border border-emerald-100 bg-emerald-50 px-3.5 py-1.5">
-          <span class="h-2 w-2 rounded-full bg-emerald-600" aria-hidden="true" />
-          <span class="text-caption font-medium text-emerald-600">{{ availability }}</span>
+        <div class="mb-6 inline-flex items-center gap-2 rounded-full border border-signal-100 bg-signal-50 px-3.5 py-1.5">
+          <span class="h-2 w-2 rounded-full bg-signal-600" aria-hidden="true" />
+          <span class="text-caption font-medium text-signal-600">{{ availability }}</span>
         </div>
 
         <h1 class="text-display text-balance text-ink-950">
@@ -34,13 +34,13 @@ withDefaults(defineProps<Props>(), {
         <div class="mt-8 flex flex-wrap gap-3">
           <NuxtLink
             to="/work"
-            class="rounded-lg bg-ink-900 px-6 py-3 text-body font-medium text-white transition-all hover:bg-ink-800 hover:shadow-card-hover"
+            class="rounded-lg bg-ink-900 px-6 py-3 text-body font-medium text-ink-0 transition-all hover:bg-ink-800 hover:shadow-card-hover"
           >
             See my work
           </NuxtLink>
           <NuxtLink
             to="/contact"
-            class="rounded-lg border border-ink-200 bg-white px-6 py-3 text-body font-medium text-ink-700 transition-all hover:border-ink-300 hover:bg-ink-50"
+            class="rounded-lg border border-ink-200 bg-ink-0 px-6 py-3 text-body font-medium text-ink-700 transition-all hover:border-ink-300 hover:bg-ink-50"
           >
             Let's talk
           </NuxtLink>

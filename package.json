@@ -4,8 +4,9 @@
   "type": "module",
   "scripts": {
     "dev": "nuxt dev",
-    "build": "nuxt build",
-    "generate": "nuxt generate",
+    "data": "node scripts/fetch-github.mjs && node scripts/fetch-articles.mjs && node scripts/generate-og.mjs",
+    "build": "npm run data && nuxt build",
+    "generate": "npm run data && nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare"
   },
@@ -21,6 +22,8 @@
     "@nuxtjs/google-fonts": "^3.2.0",
     "@nuxtjs/sitemap": "^6.1.0",
     "@nuxtjs/robots": "^4.1.0",
+    "jiti": "^2.7.0",
+    "sharp": "^0.32.6",
     "typescript": "^5.7.0"
   }
 }

@@ -77,8 +77,8 @@ const process = [
         <!-- Service 2 -->
         <div class="grid gap-8 md:grid-cols-5">
           <div class="md:col-span-2">
-            <div class="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-amber-50">
-              <svg class="h-5 w-5 text-amber-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+            <div class="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-accent-50">
+              <svg class="h-5 w-5 text-accent-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M7.5 21L3 16.5m0 0L7.5 12M3 16.5h13.5m0-13.5L21 7.5m0 0L16.5 12M21 7.5H7.5" />
               </svg>
             </div>
@@ -100,8 +100,8 @@ const process = [
         <!-- Service 3 -->
         <div class="grid gap-8 md:grid-cols-5">
           <div class="md:col-span-2">
-            <div class="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-emerald-50">
-              <svg class="h-5 w-5 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+            <div class="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-accent-50">
+              <svg class="h-5 w-5 text-accent-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75L22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3l-4.5 16.5" />
               </svg>
             </div>

@@ -14,7 +14,7 @@ defineProps<Props>()
 <template>
   <NuxtLink
     :to="`/work/${slug}`"
-    class="group block rounded-card border border-ink-100 bg-white p-6 shadow-card transition-all hover:border-ink-200 hover:shadow-card-hover"
+    class="group block rounded-card border border-ink-100 bg-ink-0 p-6 shadow-card transition-all hover:border-ink-200 hover:shadow-card-hover"
   >
     <!-- Tags -->
     <div v-if="tags?.length" class="mb-4 flex flex-wrap gap-2">
