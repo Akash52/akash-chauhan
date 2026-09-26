@@ -1,0 +1,127 @@
+# Rebuild the portfolio as a pre-rendered Nuxt site
+
+Replaces the hand-maintained `index.html` + `db.json` site with a statically
+generated Nuxt 3 build, and removes the claims on it that a client could not
+verify.
+
+The guiding rule throughout: **if a claim cannot be linked, measured, or stated
+modestly, it is cut.**
+
+## Why
+
+The old site had three problems a prospective client would hit within a minute:
+
+1. It shipped an empty shell that said "Loading…" to crawlers and link previews.
+2. `canonical` and `og:url` pointed at `akashchauhan.dev`, a domain that does not
+   resolve, and `og:image` referenced a file that was never committed — so every
+   share of the site rendered blank.
+3. Numbers contradicted each other. The meta description said 3.5+ years while
+   the body said 4+; production project counts appeared as 5, 6 and 8 on
+   different pages; the article count was "10+" when there are 12.
+
+## What changed
+
+### Every number now comes from a data file
+
+`data/profile.ts` is the single source of truth. Years of experience are
+**computed** from a start date, so the meta tags, hero, About page and the
+generated OG image cannot drift apart — and the figure ages on its own.
+
+Anything unverified is `null` and renders as nothing, rather than as a
+placeholder. The audit greps the built HTML for `[CONFIRM` and fails on a hit.
+
+- `scripts/fetch-github.mjs` — computes **stars earned** on non-fork repos (103)
+  at build time. Deliberately never reads the 312 on the profile page: that
+  counts repos Akash *starred*, and showing it as an achievement would mislead.
+- `scripts/fetch-articles.mjs` — enriches a curated list from the Medium RSS
+  feed. The live feed turned up a 12th article the curated list did not have, so
+  the site says 12 (8 in Simform Engineering), not 11.
+- No third-party stats-card images. The numbers are text with a
+  "Source: GitHub API, updated &lt;date&gt;" caption — the date is what makes them
+  believable.
+
+### Claims removed
+
+| Removed | Reason |
+| --- | --- |
+| 5 testimonials | Unattributed quotes from internal performance reviews |
+| "6 production apps", "10+ articles" | Contradicted the real counts (5 and 12) |
+| "3-year-overdue", "zero data loss", "17 Sentry errors" | Not verifiable against a public repo |
+| "zero critical bugs", "~30% faster", "30+ JS projects" | Invented metrics |
+| "Transitioned across 3 frameworks in 6 months" | Contradicted the project timeline |
+| The contact form | Posted to `formspree.io/f/YOUR_FORM_ID`, so **every submission failed and raised an `alert()`** |
+
+### Client confidentiality
+
+No client is named. Each case study declares `client_named` and `permission` in
+frontmatter, and pages that are anonymised say so in the copy rather than
+staying quiet about it — that sentence builds more trust than a logo would.
+
+Audit check 5 greps the whole built output, including JS bundles, for
+NDA-protected names. This caught a real leak: a developer comment in
+`data/articles.json` named a client, and that file is imported by a composable,
+so the comment would have shipped inside the JavaScript bundle.
+
+### A bug that would have shipped
+
+Case study pages rendered **perfect static HTML and then went blank on
+hydration**. The prerenderer emits both `/work/<slug>` and `/work/<slug>/`;
+`queryContent()` does not match a trailing slash, so the query returned null and
+`v-if="project"` erased the page. Crawlers and any HTML-reading check saw full
+content — a visitor saw nav and footer around nothing.
+
+Fixed by normalising the path, and `scripts/check-browser.mjs` now compares page
+text before and after hydration on all 10 pages so it cannot regress silently.
+
+### Build and deploy
+
+- `app.baseURL` and the `github-pages` Nitro preset. Without these every asset
+  404s on a project-path Pages site.
+- `@nuxt/image` moved to `ipxStatic` — the default provider needs a running
+  server and 404s on static hosting.
+- `site.url` set for sitemap and robots, which were emitting dead URLs.
+- `robots.txt` generation disabled: a project site cannot own `/robots.txt`,
+  since crawlers only read it at the domain root.
+- **Removes `static.yml` and `jekyll-docker.yml`.** `static.yml` uploaded the
+  repo root (`path: '.'`) to Pages on every push to `main`; left in place it
+  would race `deploy.yml` over the `pages` concurrency group and could publish
+  raw source instead of the build.
+
+### Design and accessibility
+
+Dark mode works through an inverted ink ramp in CSS custom properties, so
+`text-ink-900` means "strong text" in both themes and there is not a single
+`dark:` variant to maintain. Indigo accent replaced with clay; serif headings.
+
+Accessibility went 91 → **100**. `ink-400` was failing AA at 3.55:1, and the CTA
+panel needed a different shade because the inverted background flips which end
+of the ramp is safe. Inline links are underlined rather than colour-only.
+
+## Verification
+
+`AUDIT.md` is generated by `scripts/audit.mjs` and CI blocks the deploy on a
+failure. All 9 checklist items pass or report PARTIAL with evidence.
+
+| Measure | Result |
+| --- | --- |
+| Lighthouse | 90 / 100 / 100 / 100 (performance / a11y / best practices / SEO) |
+| Home page JS | 97.7 KB gzipped (budget 100 KB) |
+| Hydration | 10/10 pages keep their content |
+| Mobile at 360px | 20/20 page-and-theme combinations: no overflow, all standalone controls ≥44px |
+| Layout shift | 0.000 in a real mobile browser |
+
+**Performance is 90 against a 95 target.** The cost is the Nuxt hydration
+bundle, not page weight — Lighthouse reports ~23 KB of the 69 KB main chunk as
+unused under simulated throttling. Worth a follow-up, not a blocker.
+
+Medium returns 403 to automated requests, so those links are reported as
+unverifiable rather than passed, and want a manual click before merge.
+
+## Still open
+
+These render as nothing until confirmed: freelance availability, response time,
+POC count, CV Portal team size, any testimonial with permission, and whether the
+Angular consulting work was real. Two of the twelve articles have no summary —
+they predate the RSS window and Medium blocks fetching them.
+
+🤖 Generated with [Claude Code](https://claude.com/claude-code)
