@@ -34,7 +34,7 @@ export const services: Service[] = [
       'Handover notes your team can work from afterwards',
     ],
     evidence: [
-      { label: 'Baserow case study', href: '/work/baserow' },
+      { label: 'Open-source Nuxt 2 → 3 migration', href: '/work/open-source-migration' },
       {
         label: 'Nuxt 3 → 4 migration, written up',
         href: 'https://medium.com/simform-engineering/how-i-successfully-migrated-my-production-app-from-nuxt-3-to-nuxt-4-0b7379d0743d',
@@ -56,7 +56,7 @@ export const services: Service[] = [
       'Root-cause fixes, with the reasoning written down',
       'Code review and notes for the team that maintains it next',
     ],
-    evidence: [{ label: 'Baserow case study', href: '/work/baserow' }],
+    evidence: [{ label: 'Open-source Nuxt 2 → 3 migration', href: '/work/open-source-migration' }],
   },
   {
     slug: 'auth',

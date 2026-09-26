@@ -33,7 +33,7 @@ const BASE = '/akash-chauhan'
 const PORT = 4179
 
 const PAGES = [
-  '/', '/work', '/work/baserow', '/work/creator-platform',
+  '/', '/work', '/work/open-source-migration', '/work/creator-platform',
   '/work/senior-care-platform', '/work/analytics-dashboard',
   '/services', '/writing', '/about', '/contact',
 ]

@@ -230,13 +230,34 @@ for (const p of pages) p.text = visibleText(p.html)
       }
     }
   }
+  // NDA guard: these names must not appear anywhere in the shipped output,
+  // including JS bundles — data/*.json is imported into the client, so a
+  // developer comment in it is published too.
+  const FORBIDDEN = ['baserow']
+  const leaked = []
+  for (const dir of [DIST]) {
+    const walk = async (d) => {
+      for (const e of await readdir(d, { withFileTypes: true })) {
+        const full = join(d, e.name)
+        if (e.isDirectory()) { await walk(full); continue }
+        if (!/\.(html|js|json|xml|txt)$/.test(e.name)) continue
+        const body = (await readFile(full, 'utf8')).toLowerCase()
+        for (const term of FORBIDDEN) {
+          if (body.includes(term)) leaked.push(`${relative(DIST, full)} contains "${term}"`)
+        }
+      }
+    }
+    await walk(dir)
+  }
+  problems.push(...leaked.slice(0, 5))
+
   record(
     5,
     'No company logo or client name without permission: true in data',
     problems.length ? 'FAIL' : 'PASS',
     problems.length
       ? problems.join('; ')
-      : `All case studies declare a permission flag. Named with permission: ${named.length ? named.join(', ') : 'none'}. The rest are anonymised.`,
+      : `All case studies declare a permission flag. Named with permission: ${named.length ? named.join(', ') : 'none'} — every other client is anonymised, and ${FORBIDDEN.length} NDA-protected name(s) are absent from the built output.`,
   )
 }
 

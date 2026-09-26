@@ -47,6 +47,21 @@ const FEATURED = [
     name: 'awesome-almost-stack',
     blurb: 'TypeScript experiments and stack spikes.',
   },
+  // Each of these backs a claim made elsewhere on the site, which is the only
+  // reason a low-star repo earns a place here.
+  {
+    name: 'resto-mgmt-monorepo',
+    blurb:
+      'A restaurant management monorepo, built as the working example behind the monorepo article rather than a toy.',
+  },
+  {
+    name: 'tanstack-query-poc-library',
+    blurb: 'TanStack Query patterns pulled out as a library, from the article on the same subject.',
+  },
+  {
+    name: 'eda-warehouse',
+    blurb: 'An event-driven architecture demo: a warehouse domain wired up with React.',
+  },
 ]
 
 const token = process.env.GITHUB_TOKEN

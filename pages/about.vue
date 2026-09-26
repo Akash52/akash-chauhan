@@ -3,6 +3,13 @@ import { profile, experienceLabel } from '~/data/profile'
 
 const { total: articleTotal, simformCount } = useArticles()
 
+/** "January 2022" — profile.traineeFrom is stored as YYYY-MM for sorting. */
+const startedLabel = new Date(`${profile.traineeFrom}-01T00:00:00Z`).toLocaleDateString('en-GB', {
+  month: 'long',
+  year: 'numeric',
+  timeZone: 'UTC',
+})
+
 useSeo({
   title: 'About — Akash Chauhan',
   description: `Frontend engineer with ${experienceLabel()} at Simform Solutions, working across Vue, React and Angular. Based in ${profile.location}.`,
@@ -17,7 +24,7 @@ useSeo({
 const toolsByContext = [
   {
     context: 'Vue and Nuxt',
-    where: { label: 'Baserow case study', to: '/work/baserow' },
+    where: { label: 'Open-source migration case study', to: '/work/open-source-migration' },
     tools: ['Vue 3', 'Nuxt 3', 'Pinia', 'Vuex', 'TypeScript', 'Vite'],
   },
   {
@@ -84,6 +91,8 @@ const toolsByContext = [
           </div>
 
           <div class="md:col-span-2">
+            <ProfilePhoto :size="240" class="mb-6 block" />
+
             <div class="rounded-card border border-ink-100 bg-ink-50/50 p-6">
               <h2 class="text-subheading text-ink-900">Quick facts</h2>
               <dl class="mt-4 space-y-3">
@@ -98,7 +107,7 @@ const toolsByContext = [
                 <div>
                   <dt class="text-caption font-medium text-ink-400">Experience</dt>
                   <dd class="text-small text-ink-700">
-                    {{ experienceLabel() }}, since {{ profile.traineeFrom }}
+                    {{ experienceLabel() }}, since {{ startedLabel }}
                   </dd>
                 </div>
                 <div>

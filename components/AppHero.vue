@@ -19,7 +19,12 @@ const proof = [
 
 <template>
   <section class="section-padding">
-    <div class="container-content">
+    <!--
+      Photo sits beside the headline on desktop and above it on mobile, at a
+      size that reads as "this is who you would be working with" rather than a
+      hero image. eager + fetchpriority because it is above the fold.
+    -->
+    <div class="container-content flex flex-col-reverse gap-8 md:flex-row md:items-start md:justify-between md:gap-12">
       <div class="max-w-3xl">
         <!--
           The availability badge renders only once profile.availability is
@@ -59,6 +64,8 @@ const proof = [
           </NuxtLink>
         </div>
       </div>
+
+      <ProfilePhoto :size="176" class="flex-shrink-0" eager />
     </div>
   </section>
 </template>

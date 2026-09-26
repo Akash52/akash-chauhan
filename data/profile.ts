@@ -99,8 +99,8 @@ export const profile = {
   links: {
     github: 'https://github.com/Akash52',
     medium: 'https://medium.com/@19it197.akashbhai.chauhan',
-    /** Unconfirmed — the old value looked guessed, so it stays out of the build. */
-    linkedin: null as string | null,
+    /** Taken from Akash's own GitHub profile README, so this one is real. */
+    linkedin: 'https://www.linkedin.com/in/akash-chauhan-3616321a4/' as string | null,
     /** Set once the portfolio source repo is pushed. */
     sourceRepo: 'https://github.com/Akash52/akash-chauhan',
   },

@@ -6,7 +6,7 @@ const route = useRoute()
  *
  * The prerenderer emits both /work/<slug> and /work/<slug>/, and the browser
  * resolves the directory URL to the trailing-slash form. Content _path values
- * never carry one, so queryContent('/work/baserow/') matches nothing: the page
+ * never carry one, so queryContent('/work/<slug>/') matches nothing: the page
  * rendered correctly in the static HTML and then went blank on hydration.
  * Normalising here keeps the useAsyncData key stable across both forms too.
  */
