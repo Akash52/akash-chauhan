@@ -15,6 +15,18 @@ const proof = [
   `${articleTotal} technical articles`,
   msal ? `an MSAL + Nuxt 3 starter others use (${msal.stars}★)` : null,
 ].filter(Boolean)
+
+/** Says only what is confirmed — a start date appears once there is one. */
+const availabilityLabel = computed(() => {
+  const a = profile.availability
+  if (!a) return null
+  return [
+    `Available for freelance work · ${a.hoursPerWeek} hrs/week`,
+    a.startingFrom ? `from ${a.startingFrom}` : null,
+  ]
+    .filter(Boolean)
+    .join(' ')
+})
 </script>
 
 <template>
@@ -31,14 +43,11 @@ const proof = [
           confirmed. A stale "available from <month>" is worse than no badge.
         -->
         <div
-          v-if="profile.availability"
+          v-if="availabilityLabel"
           class="mb-6 inline-flex items-center gap-2 rounded-full border border-signal-100 bg-signal-50 px-3.5 py-1.5"
         >
           <span class="h-2 w-2 rounded-full bg-signal-600" aria-hidden="true" />
-          <span class="text-caption font-medium text-signal-600">
-            Available {{ profile.availability.hoursPerWeek }} hrs/week from
-            {{ profile.availability.startingFrom }}
-          </span>
+          <span class="text-caption font-medium text-signal-600">{{ availabilityLabel }}</span>
         </div>
 
         <h1 class="font-serif text-display text-balance text-ink-950">

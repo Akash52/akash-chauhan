@@ -67,15 +67,32 @@ export const profile = {
   /** Unconfirmed — phrase as "me + 2 developers" once verified. */
   cvPortalTeam: null as string | null,
 
-  /** Unconfirmed — hours/week, overlap window, earliest start. */
-  availability: null as {
-    hoursPerWeek: number
-    overlap: string
-    startingFrom: string
+  /**
+   * Confirmed 2026-09-27. `overlap` and `startingFrom` stay null until Akash
+   * commits to them; components render only the fields that are set, so a
+   * half-known availability is still publishable.
+   */
+  availability: {
+    hoursPerWeek: '15–25',
+    overlap: null,
+    startingFrom: null,
+  } as {
+    hoursPerWeek: string
+    overlap: string | null
+    startingFrom: string | null
   } | null,
 
-  /** Unconfirmed — honest response-time commitment. */
-  responseTime: null as string | null,
+  /** Confirmed 2026-09-27. Deliberately under-promised: beating it is the point. */
+  responseTime: 'I reply to project enquiries within two working days.' as string | null,
+
+  /**
+   * Contract Angular work taken through an agency. The client cannot be named
+   * and there is nothing public to link, so it gets one modest line and no
+   * case study — never a logo. Add the industry here to make it concrete.
+   */
+  agencyWork: {
+    line: 'I have also done contract Angular work for a US enterprise client through an agency, under NDA.',
+  } as { line: string } | null,
 
   education: [
     {

@@ -27,6 +27,19 @@ const body = encodeURIComponent(
   ].join('\n'),
 )
 
+/**
+ * Assembled in script rather than with template conditionals, which leave
+ * stray whitespace before punctuation when a clause is omitted.
+ */
+const availabilityLine = computed(() => {
+  const a = profile.availability
+  if (!a) return null
+  const clauses = [`Taking on freelance work at ${a.hoursPerWeek} hours a week`]
+  if (a.startingFrom) clauses.push(`from ${a.startingFrom}`)
+  if (a.overlap) clauses.push(`overlapping ${a.overlap}`)
+  return `${clauses.join(', ')}, alongside a full-time role. I am based in ${profile.location}, ${profile.timezone}.`
+})
+
 const channels = [
   {
     label: 'Email',
@@ -105,12 +118,11 @@ const channels = [
           </div>
         </dl>
 
-        <div v-if="profile.availability" class="mt-10 max-w-2xl rounded-card border border-signal-100 bg-signal-50 p-5">
-          <p class="text-small font-medium text-signal-600">
-            Taking on work: {{ profile.availability.hoursPerWeek }} hours a week from
-            {{ profile.availability.startingFrom }}, overlapping
-            {{ profile.availability.overlap }}.
-          </p>
+        <div
+          v-if="profile.availability"
+          class="mt-10 max-w-2xl rounded-card border border-signal-100 bg-signal-50 p-5"
+        >
+          <p class="text-small font-medium text-signal-600">{{ availabilityLine }}</p>
         </div>
       </div>
     </section>

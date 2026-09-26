@@ -77,6 +77,9 @@ const toolsByContext = [
                 else's conventions. The part I am best at is finding the actual cause of a bug
                 rather than the place it surfaces.
               </p>
+              <p v-if="profile.agencyWork">
+                {{ profile.agencyWork.line }}
+              </p>
               <p>
                 I am taking on freelance work now because I would rather choose the problems. The
                 ones I want are migrations, and older codebases that people have stopped wanting to
