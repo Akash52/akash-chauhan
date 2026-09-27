@@ -230,26 +230,73 @@ for (const p of pages) p.text = visibleText(p.html)
       }
     }
   }
-  // NDA guard: these names must not appear anywhere in the shipped output,
-  // including JS bundles — data/*.json is imported into the client, so a
-  // developer comment in it is published too.
-  const FORBIDDEN = ['baserow']
+  /**
+   * NDA guard. None of these may appear in the content sources or in the text a
+   * visitor actually reads.
+   *
+   * The end clients of the agency contract work are included: Akash has no
+   * written permission to name any of them, so the site lists sectors instead.
+   *
+   * Matching is case-sensitive and word-bounded on purpose. Lowercasing would
+   * flag "-apple-system" in the font stack, and an unbounded "Delta" would flag
+   * the `monthDelta` variable in profile.ts.
+   */
+  /** Only ever a client claim. Any occurrence is a leak. */
+  const CLIENT_NAMES = [
+    'Baserow', 'Bank of America', 'Citi', 'Delta', 'Moody',
+    'PricewaterhouseCoopers', 'PwC', 'UPS', 'CVS', 'National Cancer Institute',
+    'Penske', 'Truist', 'Infosys', 'TCS',
+  ]
+
+  /**
+   * Dual-use: these are also the names of technologies Akash integrates, and
+   * naming the technology you work with is normal and allowed. The phrases
+   * below are stripped before matching, so "Microsoft Entra ID" passes while a
+   * bare "Microsoft" as a client would not.
+   */
+  const DUAL_USE = ['Apple', 'Microsoft']
+  const TECH_PHRASES = [
+    'Microsoft Entra ID', 'Microsoft Entra', 'Microsoft Authentication Library',
+    'Google and Apple OAuth', 'Google or Apple', 'Apple OAuth', 'Sign in with Apple',
+  ]
+  const stripTech = (s) =>
+    TECH_PHRASES.reduce((acc, p) => acc.split(p).join(' '), s)
+
+  const FORBIDDEN = [...CLIENT_NAMES, ...DUAL_USE]
   const leaked = []
-  for (const dir of [DIST]) {
-    const walk = async (d) => {
-      for (const e of await readdir(d, { withFileTypes: true })) {
-        const full = join(d, e.name)
-        if (e.isDirectory()) { await walk(full); continue }
-        if (!/\.(html|js|json|xml|txt)$/.test(e.name)) continue
-        const body = (await readFile(full, 'utf8')).toLowerCase()
-        for (const term of FORBIDDEN) {
-          if (body.includes(term)) leaked.push(`${relative(DIST, full)} contains "${term}"`)
+
+  // 1. Content sources — where a name would realistically be pasted back in.
+  const SOURCE_DIRS = ['content', 'data', 'pages', 'components', 'composables']
+  const walkSource = async (d) => {
+    for (const e of await readdir(d, { withFileTypes: true })) {
+      const full = join(d, e.name)
+      if (e.isDirectory()) { await walkSource(full); continue }
+      if (!/\.(md|ts|json|vue)$/.test(e.name)) continue
+      if (full.includes('audit.mjs')) continue
+      const body = stripTech(await readFile(full, 'utf8'))
+      for (const term of FORBIDDEN) {
+        if (new RegExp(`\\b${term}\\b`).test(body)) {
+          leaked.push(`${relative(ROOT, full)} contains "${term}"`)
         }
       }
     }
-    await walk(dir)
   }
-  problems.push(...leaked.slice(0, 5))
+  for (const d of SOURCE_DIRS) {
+    if (existsSync(resolve(ROOT, d))) await walkSource(resolve(ROOT, d))
+  }
+
+  // 2. Rendered text. Deliberately not the minified JS: variable names there
+  //    produce false positives and are not read by anyone.
+  for (const p of pages) {
+    const visible = stripTech(p.text)
+    for (const term of FORBIDDEN) {
+      if (new RegExp(`\\b${term}\\b`).test(visible)) {
+        leaked.push(`${p.path} renders "${term}"`)
+      }
+    }
+  }
+
+  problems.push(...[...new Set(leaked)].slice(0, 6))
 
   record(
     5,

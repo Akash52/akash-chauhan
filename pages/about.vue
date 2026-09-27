@@ -77,9 +77,6 @@ const toolsByContext = [
                 else's conventions. The part I am best at is finding the actual cause of a bug
                 rather than the place it surfaces.
               </p>
-              <p v-if="profile.agencyWork">
-                {{ profile.agencyWork.line }}
-              </p>
               <p>
                 I am taking on freelance work now because I would rather choose the problems. The
                 ones I want are migrations, and older codebases that people have stopped wanting to
@@ -124,6 +121,51 @@ const toolsByContext = [
                   <dd class="text-small text-ink-700">English, Hindi, Gujarati</dd>
                 </div>
               </dl>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!--
+      Contract work. Sectors are named; clients are not, because there is no
+      written permission to name them. Saying "under NDA" plainly is what makes
+      the section credible rather than evasive.
+    -->
+    <section v-if="profile.agencyWork" class="section-padding border-t border-ink-100">
+      <div class="container-content">
+        <div class="grid gap-10 md:grid-cols-3">
+          <div>
+            <h2 class="font-serif text-display-sm text-ink-900">Contract work</h2>
+            <p class="mt-2 text-caption text-ink-400">
+              Since {{ profile.agencyWork.since }}, alongside {{ profile.company }}
+            </p>
+          </div>
+
+          <div class="md:col-span-2">
+            <p class="max-w-prose text-body leading-relaxed text-ink-600">
+              {{ profile.agencyWork.summary }}
+            </p>
+            <p class="mt-3 max-w-prose text-body leading-relaxed text-ink-600">
+              {{ profile.agencyWork.confidentiality }}
+            </p>
+
+            <h3 class="mt-7 text-caption font-medium uppercase tracking-wider text-ink-400">
+              Sectors
+            </h3>
+            <div class="mt-3 flex flex-wrap gap-2">
+              <span v-for="s in profile.agencyWork.sectors" :key="s" class="tag tag-default">
+                {{ s }}
+              </span>
+            </div>
+
+            <h3 class="mt-6 text-caption font-medium uppercase tracking-wider text-ink-400">
+              What the work involves
+            </h3>
+            <div class="mt-3 flex flex-wrap gap-2">
+              <span v-for="f in profile.agencyWork.focus" :key="f" class="tag tag-accent">
+                {{ f }}
+              </span>
             </div>
           </div>
         </div>

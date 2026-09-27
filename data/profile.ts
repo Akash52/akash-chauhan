@@ -86,13 +86,51 @@ export const profile = {
   responseTime: 'I reply to project enquiries within two working days.' as string | null,
 
   /**
-   * Contract Angular work taken through an agency. The client cannot be named
-   * and there is nothing public to link, so it gets one modest line and no
-   * case study — never a logo. Add the industry here to make it concrete.
+   * Contract Angular work taken through an agency, subcontracted onto projects
+   * delivered to US enterprise teams.
+   *
+   * Confirmed 2026-09-27: started April 2022, and there is NO written
+   * permission to name any end client. So the sectors are listed and the names
+   * are not — which is also the stronger position commercially. "Under NDA"
+   * ends a client's follow-up question; a logo invites "on what, and who was
+   * your contact?", which is the question that cannot be answered.
+   *
+   * scripts/audit.mjs fails the build if any of those client names reaches the
+   * source or the rendered output.
    */
   agencyWork: {
-    line: 'I have also done contract Angular work for a US enterprise client through an agency, under NDA.',
-  } as { line: string } | null,
+    since: 'April 2022',
+    summary:
+      'Contract Angular work through an agency, subcontracted onto projects for US enterprise teams. Mostly moving ageing AngularJS and jQuery front ends onto modern Angular, plus component architecture, RxJS and NgRx state, and performance work.',
+    confidentiality:
+      'These engagements are under NDA, so I can describe the work but not name the clients.',
+    sectors: [
+      'Finance',
+      'Healthcare',
+      'Logistics and transport',
+      'Aviation',
+      'Technology',
+      'Professional services',
+      'Government',
+    ],
+    focus: [
+      'Angular migration',
+      'Legacy modernisation',
+      'Component architecture',
+      'RxJS & NgRx',
+      'Performance optimisation',
+      'Enterprise UI systems',
+    ],
+    /** Flip to true only with written permission, per named client. */
+    namedClientsPermitted: false,
+  } as {
+    since: string
+    summary: string
+    confidentiality: string
+    sectors: string[]
+    focus: string[]
+    namedClientsPermitted: boolean
+  } | null,
 
   education: [
     {
