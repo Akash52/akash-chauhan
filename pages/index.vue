@@ -8,10 +8,9 @@ useSeo({
   path: '/',
 })
 
-// Case studies from content/work/ markdown
-const { data: featuredWork } = await useAsyncData('featured-work', () =>
-  queryContent('work').where({ featured: true }).sort({ order: 1 }).limit(3).find(),
-)
+// Case studies come from a build-time index, not a runtime content query —
+// see scripts/build-case-studies.mjs for why.
+const { featured: featuredWork } = useCaseStudies()
 
 const { featured: featuredArticles, total: articleTotal } = useArticles()
 const { featured: featuredRepos, starsEarned, updatedLabel, profileUrl } = useGithub()
@@ -43,12 +42,13 @@ const { featured: featuredRepos, starsEarned, updatedLabel, profileUrl } = useGi
         <div class="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
           <CaseStudyCard
             v-for="project in featuredWork"
-            :key="project._path"
+            :key="project.slug"
             :title="project.title"
             :description="project.description"
-            :slug="project._path?.replace('/work/', '') || ''"
+            :slug="project.slug"
             :tags="project.tags"
             :role="project.role"
+            :client="project.client"
           />
         </div>
       </div>

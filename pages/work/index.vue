@@ -6,9 +6,8 @@ useSeo({
   path: '/work',
 })
 
-const { data: projects } = await useAsyncData('all-work', () =>
-  queryContent('work').sort({ order: 1 }).find(),
-)
+// Build-time index; the detail page still queries content for the body.
+const { studies: projects } = useCaseStudies()
 </script>
 
 <template>
@@ -26,10 +25,10 @@ const { data: projects } = await useAsyncData('all-work', () =>
         <div class="mt-12 grid gap-5 md:grid-cols-2">
           <CaseStudyCard
             v-for="project in projects"
-            :key="project._path"
+            :key="project.slug"
             :title="project.title"
             :description="project.description"
-            :slug="project._path?.replace('/work/', '') || ''"
+            :slug="project.slug"
             :tags="project.tags"
             :role="project.role"
             :client="project.client"

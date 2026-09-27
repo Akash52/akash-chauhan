@@ -4,7 +4,7 @@
   "type": "module",
   "scripts": {
     "dev": "nuxt dev",
-    "data": "node scripts/fetch-github.mjs && node scripts/fetch-articles.mjs && node scripts/generate-images.mjs && node scripts/generate-og.mjs",
+    "data": "node scripts/fetch-github.mjs && node scripts/fetch-articles.mjs && node scripts/build-case-studies.mjs && node scripts/generate-images.mjs && node scripts/generate-og.mjs",
     "build": "npm run data && nuxt build",
     "generate": "npm run data && nuxt generate",
     "preview": "nuxt preview",

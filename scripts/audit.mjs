@@ -429,16 +429,17 @@ server matching GitHub Pages behaviour:
 
 | Category | Score | Budget |
 |---|---|---|
-| Performance | 90 | ≥95 |
+| Performance | 92 | ≥95 |
 | Accessibility | 100 | ≥95 |
 | Best Practices | 100 | ≥95 |
 | SEO | 100 | ≥95 |
 
 Performance sits below budget because of the Nuxt hydration bundle, not page
-weight: Lighthouse reports ~23 KB of the 69 KB main chunk as unused under
-simulated mobile throttling. Cumulative Layout Shift measures **0.000** in a real
-mobile-emulated browser; Lighthouse's 0.099 is an artefact of its network
-simulation, and metric-matched font fallbacks are in place via \`@nuxtjs/fontaine\`.
+weight: the 68.6 KB Vue/Nuxt runtime is most of the home page's JavaScript and
+Lighthouse reports much of it as unused under simulated mobile throttling.
+Cumulative Layout Shift measures **0.000** in a real mobile-emulated browser;
+Lighthouse's figure is an artefact of its network simulation, and metric-matched
+font fallbacks are in place via \`@nuxtjs/fontaine\`.
 
 **Medium links (check 3).** Medium returns 403 to automated requests. Those links
 are reported as unverifiable rather than passed or failed, and need a manual
