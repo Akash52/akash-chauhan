@@ -1,0 +1,80 @@
+<script setup lang="ts">
+import { profile, experienceLabel } from '~/data/profile'
+
+const { total: articleTotal } = useArticles()
+const { featured } = useGithub()
+
+const msal = featured.find((r) => r.name === 'msal-with-nuxt3')
+
+/**
+ * One line of proof, assembled from the data files. Every clause corresponds to
+ * something further down this site that the reader can click and check.
+ */
+const proof = [
+  `${experienceLabel()} at ${profile.company}`,
+  `${articleTotal} technical articles`,
+  msal ? `an MSAL + Nuxt 3 starter others use (${msal.stars}★)` : null,
+].filter(Boolean)
+
+/** Says only what is confirmed — a start date appears once there is one. */
+const availabilityLabel = computed(() => {
+  const a = profile.availability
+  if (!a) return null
+  return [
+    `Available for freelance work · ${a.hoursPerWeek} hrs/week`,
+    a.startingFrom ? `from ${a.startingFrom}` : null,
+  ]
+    .filter(Boolean)
+    .join(' ')
+})
+</script>
+
+<template>
+  <section class="section-padding">
+    <!--
+      Photo sits beside the headline on desktop and above it on mobile, at a
+      size that reads as "this is who you would be working with" rather than a
+      hero image. eager + fetchpriority because it is above the fold.
+    -->
+    <div class="container-content flex flex-col-reverse gap-8 md:flex-row md:items-start md:justify-between md:gap-12">
+      <div class="max-w-3xl">
+        <!--
+          The availability badge renders only once profile.availability is
+          confirmed. A stale "available from <month>" is worse than no badge.
+        -->
+        <div
+          v-if="availabilityLabel"
+          class="mb-6 inline-flex items-center gap-2 rounded-full border border-signal-100 bg-signal-50 px-3.5 py-1.5"
+        >
+          <span class="h-2 w-2 rounded-full bg-signal-600" aria-hidden="true" />
+          <span class="text-caption font-medium text-signal-600">{{ availabilityLabel }}</span>
+        </div>
+
+        <h1 class="font-serif text-display text-balance text-ink-950">
+          {{ profile.valueProp }}
+        </h1>
+
+        <p class="mt-6 text-lg leading-relaxed text-ink-600">
+          {{ proof.join(' · ') }}
+        </p>
+
+        <div class="mt-9 flex flex-wrap gap-3">
+          <NuxtLink
+            to="/work"
+            class="rounded-lg bg-ink-900 px-6 py-3 text-body font-medium text-ink-0 transition-colors hover:bg-ink-800"
+          >
+            See case studies
+          </NuxtLink>
+          <NuxtLink
+            to="/contact"
+            class="rounded-lg border border-ink-200 px-6 py-3 text-body font-medium text-ink-700 transition-colors hover:border-ink-300 hover:bg-ink-50"
+          >
+            Hire me for a project
+          </NuxtLink>
+        </div>
+      </div>
+
+      <ProfilePhoto :size="176" class="flex-shrink-0" eager />
+    </div>
+  </section>
+</template>
